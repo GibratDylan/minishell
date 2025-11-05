@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:18:17 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/05 16:34:28 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/05 18:33:11 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,6 @@ int	main(void)
 	char    *test5 = "abc";
 	char    *test6 = "abcd";
 	char    *test7 = "abe";
-
 	printf("%i, ", ft_strncmp(test4, test4, 2));
 	printf("%i, ", ft_strncmp(test4, test5, 2));
 	printf("%i, ", ft_strncmp(test5, test4, 4));
@@ -200,7 +199,6 @@ int	main(void)
 	char    *test12 = "abc";
 	char    *test13 = "abcd";
 	char    *test14 = "abe";
-
 	printf("%i, ", ft_memcmp(test11, test11, 2));
 	printf("%i, ", ft_memcmp(test11, test12, 2));
 	printf("%i, ", ft_memcmp(test12, test11, 4));
@@ -213,10 +211,8 @@ int	main(void)
 	//char *find2 = "de";
 	char str12[] = "abcdef";
 	//char str13[] = "abcedf";
-
-	printf("%s|", ft_strnstr(str12, find1, 3));
+	printf("%s\n", ft_strnstr(str12, find1, 3));
 	//printf("%s\n", strnstr(str13, find2, 3));
-
 	printf("\nft_atoi:\n");
 	printf("%d\n", ft_atoi("  	+21474trew"));
 	printf("%d\n", ft_atoi("  	-21474trew"));
@@ -229,7 +225,6 @@ int	main(void)
 	int	*pointer2 = ft_calloc(10, 0);
 	int	*pointer3 = ft_calloc(1000000, 10000000000000000);
 	i = 0;
-
 	while (i < 10 - 1)
 	{
 		pointer[i] = i;
@@ -241,7 +236,6 @@ int	main(void)
 	printf("\n%p\n", pointer1);
 	printf("%p\n", pointer2);
 	printf("%p\n", pointer3);
-
 	free(pointer);
 	free(pointer3);
 	free(pointer1);
@@ -253,13 +247,11 @@ int	main(void)
 	de = ft_strdup(s);
 	printf("%s\n", de);
 	free(de);
-
 	char    *s1 = "";
 	char    *de1;
 	de1 = ft_strdup(s1);
 	printf("%s\n", de1);
 	free(de1);
-
 	char    *s2 = "\n";
 	char    *de2;
 	de2 = ft_strdup(s2);
@@ -267,11 +259,21 @@ int	main(void)
 	free(de2);
 
 	printf("\nft_substr:\n");
-
-	char substr[] = "abcd";
-	char *substr1 = ft_substr(substr, 3, 3);
+	char	substr[] = "abcd";
+	char	*substr1 = ft_substr(substr, 3, 3);
 	printf("%s\n", substr1);
 	free(substr1);
 
+	printf("\nft_strjoin:\n");
+	char	*strjoin1 = "abcd";
+	char	*strjoin2 = "efgh";
+	char	*strjoin3 = ft_strjoin(strjoin1, strjoin2);
+	printf("%s\n", strjoin3);
+
+	printf("\nft_strtrim:\n");
+	char	strtrim[] = "   	/.abcdef.///.	  	";
+	char	*strtrim1;
+	strtrim1 = ft_strtrim(strtrim, " /.	");
+	printf("%s\n", strtrim1);
 	return (0);
 }
