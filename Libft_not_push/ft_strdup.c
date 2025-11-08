@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:49:13 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/05 14:54:06 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/08 12:12:09 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 char	*ft_strdup(const char *s)
 {
-	int		len_src;
-	int		i;
-	char	*dest;
+	unsigned long	i;
+	char			*dest;
+	size_t			len_src;
 
 	len_src = ft_strlen(s);
+	if (s == NULL || len_src + 1 > ULONG_MAX / sizeof(char))
+		return (NULL);
 	dest = malloc((sizeof(char) * len_src) + 1);
 	if (dest == NULL)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (s[i])
 	{

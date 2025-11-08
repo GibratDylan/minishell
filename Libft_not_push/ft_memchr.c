@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 18:36:52 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/05 10:36:36 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/07 15:13:03 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	unsigned char	uc_c;
 
 	i = 0;
-	uc_c = (unsigned char) c;
-	uc_s = (unsigned char *) s;
+	uc_c = (unsigned char)c;
+	uc_s = (unsigned char *)s;
 	while (i < n)
 	{
 		if (uc_c == uc_s[i])
-			return ((char *) &uc_s[i]);
+			return ((char *)&uc_s[i]);
 		i++;
 	}
 	return (NULL);

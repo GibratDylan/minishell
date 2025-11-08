@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 15:13:51 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/05 10:35:14 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/07 15:26:31 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,15 @@
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned long	i;
-	unsigned char	*uc_dest;
-	unsigned char	*uc_src;
 
-	uc_dest = (unsigned char *) dest;
-	uc_src = (unsigned char *) src;
+	if (dest == NULL || src == NULL)
+		return (NULL);
 	if (dest < src)
 	{
 		i = 0;
 		while (i < n)
 		{
-			uc_dest[i] = uc_src[i];
+			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
 			i++;
 		}
 	}
@@ -34,7 +32,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		i = n;
 		while (i > 0)
 		{
-			uc_dest[i - 1] = uc_src[i - 1];
+			((unsigned char *)dest)[i - 1] = ((unsigned char *)src)[i - 1];
 			i--;
 		}
 	}

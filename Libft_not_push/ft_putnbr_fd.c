@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 08:50:17 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/07 18:46:34 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/08 12:31:02 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/11/08 12:41:25 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned long	i;
+	long long	ll_n;
+	char		c_nb;
 
-	if (s == NULL)
-		return (NULL);
-	i = 0;
-	while (i < n)
-		((unsigned char *)s)[i++] = (unsigned char)c;
-	return (s);
+	ll_n = (long long)n;
+	if (ll_n < 0)
+	{
+		write(fd, "-", 1);
+		ll_n *= -1;
+	}
+	if ((ll_n >= 0) && (ll_n <= 9))
+	{
+		c_nb = ll_n + '0';
+		write(fd, &c_nb, 1);
+	}
+	if (ll_n > 9)
+	{
+		ft_putnbr_fd(ll_n / 10, fd);
+		ft_putnbr_fd(ll_n % 10, fd);
+	}
 }

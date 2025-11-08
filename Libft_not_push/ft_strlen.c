@@ -6,22 +6,20 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 18:00:09 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/05 16:35:42 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/08 12:00:23 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 size_t	ft_strlen(const char *s)
-{	
-	int	i;
+{
+	unsigned long	i;
 
 	if (s == NULL)
 		return (0);
 	i = 0;
-	while (s[i] != '\0')
-	{
+	while (s[i] != '\0' && i < ULONG_MAX)
 		i++;
-	}
 	return (i);
 }

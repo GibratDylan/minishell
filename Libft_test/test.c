@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:18:17 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/05 18:33:11 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/08 15:13:24 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	main(void)
 	printf("%i\n", ft_isalnum('+'));
 
 	printf("\nft_isascii:\n");
-	printf("%i\n", ft_isascii('9'));
+	printf("%i\n", ft_isascii(-1));
 	printf("%i\n", ft_isascii('a'));
-	printf("%i\n", ft_isascii('0'));
+	printf("%i\n", ft_isascii(128));
 	printf("%i\n", ft_isascii('+'));
 
 	printf("\nft_isprint:\n");
@@ -123,7 +123,7 @@ int	main(void)
 	while (k < 5)
 	{
 		char	src1[] = "abc";
-		char	dest1[100];
+		char	dest1[100] = {'0'};
 		unsigned int	i;
 		i = ft_strlcpy(dest1, src1, k);
 		printf("|src: %s, ", src1);
@@ -165,12 +165,12 @@ int	main(void)
 	printf("%c\n", ft_tolower(test3));
 
 	printf("\nft_strchr:\n");
-	printf("%s\n", ft_strchr("coucou", 'c'));
+	printf("%s\n", ft_strchr("coucou", 'c' + 256));
 	printf("%p\n", ft_strchr("ouou", 'c'));
 	printf("%p\n", ft_strchr("aedf", '\0'));
 
 	printf("\nft_strrchr:\n");
-	printf("%s\n", ft_strrchr("coucou", 'c'));
+	printf("%s\n", ft_strrchr("coucou", 'c' + 256));
 	printf("%p\n", ft_strrchr("ouou", 'c'));
 	printf("%p\n", ft_strrchr("aedf", '\0'));
 
@@ -207,12 +207,13 @@ int	main(void)
 	printf("%i \n", ft_memcmp(test14, test13, 1));
 
 	printf("\nft_strnstr:\n");
-	char *find1 = "de";
+	//char *find1 = "cd";
 	//char *find2 = "de";
-	char str12[] = "abcdef";
+	char str12[30] = "aaabcabcd";
 	//char str13[] = "abcedf";
-	printf("%s\n", ft_strnstr(str12, find1, 3));
+	printf("%p\n", ft_strnstr(str12, "cd", 8));
 	//printf("%s\n", strnstr(str13, find2, 3));
+
 	printf("\nft_atoi:\n");
 	printf("%d\n", ft_atoi("  	+21474trew"));
 	printf("%d\n", ft_atoi("  	-21474trew"));
@@ -222,10 +223,10 @@ int	main(void)
 	printf("\nft_calloc:\n");
     int	*pointer = ft_calloc(10, sizeof(int));
 	int	*pointer1 = ft_calloc(0, sizeof(int));
-	int	*pointer2 = ft_calloc(10, 0);
+	int	*pointer2 = ft_calloc(0, 0);
 	int	*pointer3 = ft_calloc(1000000, 10000000000000000);
 	i = 0;
-	while (i < 10 - 1)
+	while (i < 10)
 	{
 		pointer[i] = i;
 		i++;
@@ -269,11 +270,49 @@ int	main(void)
 	char	*strjoin2 = "efgh";
 	char	*strjoin3 = ft_strjoin(strjoin1, strjoin2);
 	printf("%s\n", strjoin3);
+	free(strjoin3);
 
 	printf("\nft_strtrim:\n");
 	char	strtrim[] = "   	/.abcdef.///.	  	";
 	char	*strtrim1;
 	strtrim1 = ft_strtrim(strtrim, " /.	");
 	printf("%s\n", strtrim1);
+	free(strtrim1);
+
+	printf("\nft_split:\n");
+	char ft_splitstr[] = "";
+	char ft_splitstr1[] = "...Saluttout.lemondeJesu";
+	char ft_splitsep = '.';
+	char **ft_splitarray;
+	char **ft_splitarray1;
+	ft_splitarray = ft_split(ft_splitstr, ft_splitsep);
+	ft_splitarray1 = ft_split(ft_splitstr1, ft_splitsep);
+	int ft_spliti = 0;
+	while (ft_splitarray[ft_spliti] != NULL)
+	{
+		printf("%s\n", ft_splitarray[ft_spliti]);
+		free(ft_splitarray[ft_spliti]);
+		i++;
+	}
+	free(ft_splitarray);
+	printf("||\n");
+	ft_spliti = 0;
+	while (ft_splitarray1[ft_spliti] != NULL)
+	{
+		printf("%s\n", ft_splitarray1[ft_spliti]);
+		free(ft_splitarray1[ft_spliti]);
+		ft_spliti++;
+	}
+	free(ft_splitarray1);
+
+	printf("\nft_itoa:\n");
+	char	*ft_itoastr;
+	ft_itoastr = ft_itoa(-700);
+	printf("%s\n", ft_itoastr);
+	free(ft_itoastr);
+
+	printf("\nft_strmap:\n");
+	
+
 	return (0);
 }

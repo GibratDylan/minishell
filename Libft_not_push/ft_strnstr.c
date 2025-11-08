@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 10:43:18 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/05 12:33:58 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/08 15:44:36 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int				len_big;
-	int				len_little;
 	unsigned long	i;
+	size_t			len_big;
+	size_t			len_little;
 
-	len_little = ft_strlen(little);
+	if (big == NULL || little == NULL)
+		return (NULL);
 	len_big = ft_strlen(big);
-	i = 0;
+	len_little = ft_strlen(little);
 	if (len_big == 0 && len_little == 0)
-		return ((char *) big);
-	while (big[i] && i < len)
+		return ((char *)big);
+	i = 0;
+	while (big[i] && i < len - len_little)
 	{
 		if (ft_strncmp(little, &big[i], len_little) == 0)
-		{
-			return ((char *) &big[i]);
-		}
+			return ((char *)&big[i]);
 		i++;
 	}
 	return (NULL);

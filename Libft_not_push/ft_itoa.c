@@ -1,32 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 16:38:34 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/08 12:14:57 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/06 13:54:58 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/11/07 17:56:31 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static size_t	ft_len_n(int n)
 {
-	size_t	len_s1;
-	size_t	len_s2;
+	unsigned long	len_n;
+
+	len_n = 0;
+	if (n <= 0)
+	{
+		len_n++;
+		n *= -1;
+	}
+	while (n > 0)
+	{
+		len_n++;
+		n /= 10;
+	}
+	return (len_n);
+}
+
+char	*ft_itoa(int n)
+{
+	size_t	len_n;
 	char	*result;
 
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	if (s1 == NULL || s2 == NULL || len_s1 + len_s2 + 1 > ULONG_MAX
-		/ sizeof(char))
-		return (NULL);
-	result = malloc(sizeof(char) * (len_s1 + len_s2 + 1));
+	len_n = ft_len_n(n);
+	result = malloc((len_n + 1) * sizeof(char));
 	if (result == NULL)
 		return (NULL);
-	ft_strlcpy(result, s1, sizeof(s1));
-	ft_strlcpy(&result[len_s1], s2, sizeof(s2));
+	if (n < 0)
+	{
+		result[0] = '-';
+		n *= -1;
+	}
+	result[len_n--] = '\0';
+	while (n > 9)
+	{
+		result[len_n--] = n % 10 + '0';
+		n /= 10;
+	}
+	result[len_n] = n % 10 + '0';
 	return (result);
 }

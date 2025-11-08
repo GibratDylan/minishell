@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 09:21:26 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/04 14:58:14 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/07 15:11:32 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	ft_memset(s, 0, n);
+	if (s != NULL)
+		ft_memset(s, 0, n);
 }

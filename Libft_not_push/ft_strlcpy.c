@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:39:57 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/04 16:42:52 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/07 16:02:38 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 {
-	size_t	i;
-	size_t	j;
+	unsigned long	j;
 
-	i = ft_strlen(src);
+	if (dst == NULL || src == NULL)
+		return (0);
 	j = 0;
 	while (src[j] != '\0' && j + 1 < siz)
 	{
@@ -25,8 +25,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 		j++;
 	}
 	if (siz != 0)
-	{
 		dst[j] = '\0';
-	}
-	return (i);
+	return (ft_strlen(src));
 }
