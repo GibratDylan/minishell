@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:41:22 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/20 10:40:55 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/20 17:08:33 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ static int	ft_conversion(va_list list, char *conversion)
 
 	if (conversion[0] == '\0')
 		return (-1);
-	if (conversion[0] == 'c')
-	{
-		ft_putchar_fd(va_arg(list, int), 1);
-		return (1);
-	}
+	else if (conversion[0] == 'c')
+		return (ft_putchar_fd(va_arg(list, int), 1));
+	else if (conversion[0] == '%')
+		return (ft_putchar_fd('%', 1));
 	else if (conversion[0] == 'u')
 		tmp = ft_itoa_base(va_arg(list, unsigned int), "0123456789", 0);
 	else if (conversion[0] == 's')
@@ -39,43 +38,33 @@ static int	ft_conversion(va_list list, char *conversion)
 	count = ft_strlen(tmp);
 	ft_putstr_fd(tmp, 1);
 	free(tmp);
-	tmp = NULL;
 	return (count);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	unsigned long	i;
-	va_list			list;
-	char			all_conversions[9];
-	int				count;
-	int				result_conversion;
+	va_list	list;
+	char	all_cv[10];
+	int		count;
+	int		result;
 
 	count = 0;
 	va_start(list, str);
-	ft_strlcpy(all_conversions, "cspdiuxX", 9);
+	ft_strlcpy(all_cv, "cspdiuxX%", 10);
 	if (str == NULL)
 		return (-1);
-	i = 0;
-	while (str[i] != '\0')
+	while (*str != '\0')
 	{
-		if (str[i] != '%' || ((str[i + 1] == '%' || ft_strchr(all_conversions,
-						str[i + 1]) == NULL) && str[i] == '%'))
-		{
-			ft_putchar_fd(str[i], 1);
-			count++;
-			if (str[i + 1] == '%' && str[i] == '%')
-				i++;
-		}
+		if (*str != '%' || (!(ft_strchr(all_cv, *(str + 1))) && *str == '%'))
+			count += ft_putchar_fd(*str, 1);
 		else
 		{
-			result_conversion = ft_conversion(list, ft_strchr(all_conversions,
-						str[++i]));
-			if (result_conversion == -1)
-				return (-1);
-			count += result_conversion;
+			result = ft_conversion(list, ft_strchr(all_cv, *(++str)));
+			if (result == -1)
+				return (result);
+			count += result;
 		}
-		i++;
+		str++;
 	}
 	va_end(list);
 	return (count);

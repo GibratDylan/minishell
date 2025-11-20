@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 10:05:31 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/18 10:55:10 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/20 14:46:26 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # endif
 
 size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
-size_t	ft_strlcpy(char *dst, const char *src, size_t siz);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int len, int c);
+void	ft_strlcpy(char *dst, const char *src, size_t siz);
+char	*ft_strjoin(char const *s1, char const *s2, unsigned int len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*get_next_line(int fd);
 

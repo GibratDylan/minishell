@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 17:23:04 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/18 19:07:54 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/20 16:20:33 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@ static void	read_in_file(char **line, int fd)
 	ssize_t	size_read;
 	char	*buffer;
 	char	*tmp;
+	size_t	total;
 
-	buffer = malloc((BUFFER_SIZE + sizeof(char)) * sizeof(char));
+	buffer = malloc((BUFFER_SIZE * sizeof(char)) + sizeof(char));
 	size_read = 1;
 	if (buffer == NULL)
 		size_read = -1;
-	while (size_read > 0 && (ft_strchr(*line, '\n') == NULL))
+	total = ft_strlen(*line);
+	while (size_read > 0 && ft_strchr(*line, total - size_read, '\n') == NULL)
 	{
 		size_read = read(fd, buffer, BUFFER_SIZE * sizeof(char));
 		if (size_read >= 0)
 		{
 			buffer[size_read] = '\0';
-			tmp = ft_strjoin(*line, buffer);
+			tmp = ft_strjoin(*line, buffer, total);
 			free(*line);
 			*line = tmp;
+			total += size_read;
 		}
-	}
-	if (size_read == -1)
-	{
-		free(*line);
-		*line = NULL;
+		else
+			free(*line);
 	}
 	free(buffer);
 }

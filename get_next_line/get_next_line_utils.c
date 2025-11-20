@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 10:13:08 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/18 14:34:46 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/20 14:46:50 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int len, int c)
 {
 	unsigned long	i;
 	char			c_c;
@@ -35,6 +35,8 @@ char	*ft_strchr(const char *s, int c)
 	if (c_c == '\0')
 		return ((char *)&s[ft_strlen(s)]);
 	i = 0;
+	if (len >= 0)
+		i = len;
 	while (s[i] != '\0')
 	{
 		if (c_c == s[i])
@@ -44,12 +46,12 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
+void	ft_strlcpy(char *dst, const char *src, size_t siz)
 {
 	unsigned long	i;
 
 	if (dst == NULL || src == NULL)
-		return (0);
+		return ;
 	i = 0;
 	while ((src != NULL) && (src[i] != '\0') && i + 1 < siz)
 	{
@@ -58,7 +60,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 	}
 	if (siz != 0)
 		dst[i] = '\0';
-	return (ft_strlen(src));
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -76,13 +77,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (subs);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2, unsigned int len)
 {
 	size_t	len_s1;
 	size_t	len_s2;
 	char	*result;
 
-	len_s1 = ft_strlen(s1);
+	len_s1 = len;
 	len_s2 = ft_strlen(s2);
 	if (s2 == NULL || len_s1 + len_s2 + 1 > ULONG_MAX / sizeof(char))
 		return (NULL);
