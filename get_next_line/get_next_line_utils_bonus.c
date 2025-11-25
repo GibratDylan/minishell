@@ -6,11 +6,11 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 17:22:43 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/20 16:20:30 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/21 14:38:19 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {

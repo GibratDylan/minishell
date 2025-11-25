@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 10:13:08 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/20 14:46:50 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/21 15:23:36 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	*ft_strjoin(char const *s1, char const *s2, unsigned int len)
 	{
 		free(result);
 		result = NULL;
-		return (result);
+		return (NULL);
 	}
 	ft_strlcpy(result, s1, len_s1 + 1);
 	ft_strlcpy(&result[len_s1], s2, len_s2 + 1);

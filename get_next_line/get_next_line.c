@@ -6,42 +6,35 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 10:05:34 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/20 15:20:27 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/24 11:19:26 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void	read_in_file(char **line, int fd)
+int	read_in_file(char **line, int fd, size_t total, char *buffer)
 {
 	ssize_t	size_read;
-	char	*buffer;
 	char	*tmp;
-	size_t	total;
 
-	buffer = malloc((BUFFER_SIZE * sizeof(char)) + sizeof(char));
 	size_read = 1;
-	if (buffer == NULL)
-		size_read = -1;
-	total = ft_strlen(*line);
 	while (size_read > 0 && ft_strchr(*line, total - size_read, '\n') == NULL)
 	{
-		size_read = read(fd, buffer, BUFFER_SIZE * sizeof(char));
-		if (size_read >= 0)
-		{
-			buffer[size_read] = '\0';
-			tmp = ft_strjoin(*line, buffer, total);
-			free(*line);
-			*line = tmp;
-			total += size_read;
-		}
-		else
-			free(*line);
+		size_read = read(fd, buffer, BUFFER_SIZE);
+		if (size_read < 0)
+			return (0);
+		buffer[size_read] = '\0';
+		tmp = ft_strjoin(*line, buffer, total);
+		if (tmp == NULL)
+			return (0);
+		free(*line);
+		*line = tmp;
+		total += size_read;
 	}
-	free(buffer);
+	return (1);
 }
 
-static char	*get_first_line(char **line)
+char	*get_first_line(char **line)
 {
 	unsigned int	i;
 	char			*result;
@@ -55,16 +48,44 @@ static char	*get_first_line(char **line)
 	if ((*line)[i] == '\n')
 		i++;
 	result = ft_substr(*line, 0, i);
+	if (result == NULL)
+		return (NULL);
 	tmp = ft_substr(*line, i, ft_strlen(*line));
 	free(*line);
 	*line = tmp;
 	return (result);
 }
 
+char	*ft_free_str(char **line)
+{
+	free(*line);
+	*line = NULL;
+	return (NULL);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*line;
+	char		*buffer;
+	char		*result;
 
-	read_in_file(&line, fd);
-	return (get_first_line(&line));
+	if (fd >= 0 && fd <= 1024 && BUFFER_SIZE > 0)
+	{
+		buffer = malloc(BUFFER_SIZE + sizeof(char));
+		if (buffer == NULL)
+			return (ft_free_str(&line));
+		if (read_in_file(&line, fd, ft_strlen(line), buffer) == 0)
+		{
+			free(buffer);
+			buffer = NULL;
+			return (ft_free_str(&line));
+		}
+		free(buffer);
+		buffer = NULL;
+		result = get_first_line(&line);
+		if (result == NULL)
+			return (ft_free_str(&line));
+		return (result);
+	}
+	return (NULL);
 }
