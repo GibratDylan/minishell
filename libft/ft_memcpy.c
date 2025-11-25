@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_test.c                                   :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 17:12:55 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/21 18:18:28 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/04 09:27:20 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/11/08 14:58:11 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf/ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int	result;
+	unsigned long	i;
 
-	result = ft_printf(">------------<%4c>------------<", '\0');
-	printf("\n%i\n", result);
-	ft_printf("===============================\n");
-	result = printf("%5%");
-	printf("\n%i\n", result);
-	return (0);
+	i = 0;
+	if (dest == NULL || src == NULL)
+		return (dest);
+	while (i < n)
+	{
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return (dest);
 }

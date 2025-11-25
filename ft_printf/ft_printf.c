@@ -6,20 +6,29 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:41:22 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/20 17:08:33 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/21 18:00:15 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static int	ft_count_and_write(char *tmp)
+{
+	int	count;
+
+	count = ft_strlen(tmp);
+	ft_putstr_fd(tmp, 1);
+	free(tmp);
+	tmp = NULL;
+	return (count);
+}
+
 static int	ft_conversion(va_list list, char *conversion)
 {
 	char	*tmp;
-	int		count;
 
-	if (conversion[0] == '\0')
-		return (-1);
-	else if (conversion[0] == 'c')
+	tmp = NULL;
+	if (conversion[0] == 'c')
 		return (ft_putchar_fd(va_arg(list, int), 1));
 	else if (conversion[0] == '%')
 		return (ft_putchar_fd('%', 1));
@@ -33,12 +42,11 @@ static int	ft_conversion(va_list list, char *conversion)
 		tmp = ft_itoa_base(va_arg(list, unsigned int), "0123456789ABCDEF", 0);
 	else if (conversion[0] == 'p')
 		tmp = ft_itoa_base(va_arg(list, unsigned long), "0123456789abcdef", 1);
-	else
+	else if (conversion[0] == 'i' || conversion[0] == 'd')
 		tmp = ft_itoa((va_arg(list, int)));
-	count = ft_strlen(tmp);
-	ft_putstr_fd(tmp, 1);
-	free(tmp);
-	return (count);
+	if (tmp == NULL || conversion[0] == '\0')
+		return (-1);
+	return (ft_count_and_write(tmp));
 }
 
 int	ft_printf(const char *str, ...)
@@ -61,7 +69,7 @@ int	ft_printf(const char *str, ...)
 		{
 			result = ft_conversion(list, ft_strchr(all_cv, *(++str)));
 			if (result == -1)
-				return (result);
+				return (-1);
 			count += result;
 		}
 		str++;

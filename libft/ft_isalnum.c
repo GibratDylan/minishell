@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_test.c                                   :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 17:12:55 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/21 18:18:28 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/03 17:11:03 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/11/03 17:50:12 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf/ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+int	ft_isalnum(int c)
 {
-	int	result;
-
-	result = ft_printf(">------------<%4c>------------<", '\0');
-	printf("\n%i\n", result);
-	ft_printf("===============================\n");
-	result = printf("%5%");
-	printf("\n%i\n", result);
-	return (0);
+	if ((ft_isalpha(c)) || (ft_isdigit(c)))
+		return (1);
+	else
+		return (0);
 }

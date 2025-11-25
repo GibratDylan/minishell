@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_test.c                                   :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 17:12:55 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/21 18:18:28 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/05 13:16:59 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/11/20 13:49:09 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf/ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int	result;
+	void	*result;
 
-	result = ft_printf(">------------<%4c>------------<", '\0');
-	printf("\n%i\n", result);
-	ft_printf("===============================\n");
-	result = printf("%5%");
-	printf("\n%i\n", result);
-	return (0);
+	if (size == 0 || nmemb == 0 || nmemb > ULONG_MAX / size)
+		return (NULL);
+	result = malloc(nmemb * size);
+	if (result == NULL)
+		return (result);
+	ft_bzero(result, nmemb * size);
+	return (result);
 }

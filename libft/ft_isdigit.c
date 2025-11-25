@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_test.c                                   :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 17:12:55 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/21 18:18:28 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/03 17:07:31 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/11/03 17:51:00 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf/ft_printf.h"
-#include <stdio.h>
-
-int	main(void)
+int	ft_isdigit(int c)
 {
-	int	result;
-
-	result = ft_printf(">------------<%4c>------------<", '\0');
-	printf("\n%i\n", result);
-	ft_printf("===============================\n");
-	result = printf("%5%");
-	printf("\n%i\n", result);
-	return (0);
+	if (c >= 48 && c <= 57)
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }

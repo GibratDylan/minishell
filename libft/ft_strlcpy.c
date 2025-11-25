@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_test.c                                   :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 17:12:55 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/21 18:18:28 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/04 16:39:57 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/11/10 19:13:19 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf/ft_printf.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(void)
+size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 {
-	int	result;
+	unsigned long	i;
 
-	result = ft_printf(">------------<%4c>------------<", '\0');
-	printf("\n%i\n", result);
-	ft_printf("===============================\n");
-	result = printf("%5%");
-	printf("\n%i\n", result);
-	return (0);
+	if (dst == NULL || src == NULL)
+		return (0);
+	i = 0;
+	while (src[i] != '\0' && i + 1 < siz)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	if (siz != 0)
+		dst[i] = '\0';
+	return (ft_strlen(src));
 }
