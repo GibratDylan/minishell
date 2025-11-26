@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 16:53:19 by dgibrat           #+#    #+#              #
-#    Updated: 2025/11/26 10:23:17 by dgibrat          ###   ########.fr        #
+#    Updated: 2025/11/26 10:28:17 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,10 +47,5 @@ fclean: clean
 	$(MAKE) -C libft fclean
 
 re: fclean all
-
-test:
-	gcc -g -O0 ../ft_printf_test/ft_printf_test.c -L. -lftprintf -no-pie
-	valgrind -q --leak-check=full --show-reachable=yes --track-origins=yes --tool=memcheck ./a.out
-	rm -f ./a.out
 
 .PHONY: all fclean clean re test
