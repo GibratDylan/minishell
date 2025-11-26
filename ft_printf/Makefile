@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 16:53:19 by dgibrat           #+#    #+#              #
-#    Updated: 2025/11/21 18:10:11 by dgibrat          ###   ########.fr        #
+#    Updated: 2025/11/26 10:23:17 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJ = $(SRC:.c=.o)
 LIBFTPATH = libft/
 
 SRCLIBFT = ft_strlcpy.c ft_putchar_fd.c ft_strchr.c ft_strdup.c\
-ft_itoa.c ft_strlen.c ft_putstr_fd.c
+ft_strlen.c ft_putstr_fd.c ft_itoa.c
 
 OBJLIBFT = $(SRCLIBFT:.c=.o)
 
@@ -47,8 +47,6 @@ fclean: clean
 	$(MAKE) -C libft fclean
 
 re: fclean all
-
-bonus:
 
 test:
 	gcc -g -O0 ../ft_printf_test/ft_printf_test.c -L. -lftprintf -no-pie

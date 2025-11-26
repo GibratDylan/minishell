@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:41:22 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/21 18:00:15 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/26 10:23:31 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	ft_conversion(va_list list, char *conversion)
 	else if (conversion[0] == 'p')
 		tmp = ft_itoa_base(va_arg(list, unsigned long), "0123456789abcdef", 1);
 	else if (conversion[0] == 'i' || conversion[0] == 'd')
-		tmp = ft_itoa((va_arg(list, int)));
+		tmp = ft_itoa(va_arg(list, int));
 	if (tmp == NULL || conversion[0] == '\0')
 		return (-1);
 	return (ft_count_and_write(tmp));
@@ -63,7 +63,7 @@ int	ft_printf(const char *str, ...)
 		return (-1);
 	while (*str != '\0')
 	{
-		if (*str != '%' || (!(ft_strchr(all_cv, *(str + 1))) && *str == '%'))
+		if (*str != '%' || (!ft_strchr(all_cv, *(str + 1)) && *str == '%'))
 			count += ft_putchar_fd(*str, 1);
 		else
 		{
