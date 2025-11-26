@@ -6,13 +6,13 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 10:05:34 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/24 11:19:26 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/26 10:24:24 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	read_in_file(char **line, int fd, size_t total, char *buffer)
+static int	read_in_file(char **line, int fd, size_t total, char *buffer)
 {
 	ssize_t	size_read;
 	char	*tmp;
@@ -34,7 +34,7 @@ int	read_in_file(char **line, int fd, size_t total, char *buffer)
 	return (1);
 }
 
-char	*get_first_line(char **line)
+static char	*get_first_line(char **line)
 {
 	unsigned int	i;
 	char			*result;
@@ -56,7 +56,7 @@ char	*get_first_line(char **line)
 	return (result);
 }
 
-char	*ft_free_str(char **line)
+static char	*ft_free_str(char **line)
 {
 	free(*line);
 	*line = NULL;
