@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 10:31:40 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/11 15:34:19 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/04 18:20:15 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/11/08 15:56:54 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+char	*ft_strrchr(const char *s, int c)
 {
-	int	count;
+	unsigned long	i;
+	char			c_c;
+	size_t			len_s;
 
-	count = 0;
-	if (lst == NULL)
-		return (count);
-	while (lst != NULL)
+	c_c = (char)c;
+	len_s = ft_strlen(s);
+	if (s == NULL)
+		return (NULL);
+	if (c_c == '\0')
+		return ((char *)&s[len_s]);
+	i = 0;
+	while (i <= len_s)
 	{
-		count++;
-		lst = lst->next;
+		if (c_c == s[len_s - i])
+			return ((char *)&s[len_s - i]);
+		i++;
 	}
-	return (count);
+	return (NULL);
 }

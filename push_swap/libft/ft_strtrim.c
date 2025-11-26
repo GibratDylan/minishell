@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 13:48:31 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/17 13:30:50 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/05 17:32:40 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/11/13 19:32:51 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	t_list	*lstresult;
-	t_list	*tmp;
+	unsigned long	i;
+	unsigned long	start;
+	size_t			len_s1;
 
-	lstresult = NULL;
-	while (lst != NULL)
-	{
-		tmp = ft_lstnew((*f)(lst->content));
-		if (tmp == NULL)
-		{
-			ft_lstclear(&lstresult, del);
-			return (NULL);
-		}
-		ft_lstadd_back(&lstresult, tmp);
-		lst = lst->next;
-	}
-	return (lstresult);
+	if (s1 == NULL || set == NULL)
+		return (NULL);
+	len_s1 = ft_strlen(s1);
+	i = 0;
+	while (i < len_s1 && ft_strchr(set, s1[i]))
+		i++;
+	start = i;
+	i = 0;
+	while (i < len_s1 && ft_strchr(set, s1[len_s1 - i - 1]))
+		i++;
+	return (ft_substr(s1, start, len_s1 - i - start));
 }

@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 10:59:58 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/11 15:34:07 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/04 16:39:57 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/11/10 19:13:19 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 {
-	t_list	*last_node;
+	unsigned long	i;
 
-	if (*lst == NULL)
-		*lst = new;
-	else
+	if (dst == NULL || src == NULL)
+		return (0);
+	i = 0;
+	while (src[i] != '\0' && i + 1 < siz)
 	{
-		last_node = ft_lstlast(*lst);
-		last_node->next = new;
+		dst[i] = src[i];
+		i++;
 	}
+	if (siz != 0)
+		dst[i] = '\0';
+	return (ft_strlen(src));
 }
