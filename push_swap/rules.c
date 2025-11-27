@@ -6,30 +6,23 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 15:10:10 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/26 18:57:07 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/11/27 19:00:27 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_a(t_list *stack_a)
+void	swap(t_list *stack, char stack_c)
 {
 	int	tmp;
 
-	tmp = stack_a->next->content;
-	stack_a->next->content = stack_a->content;
-	stack_a->content = tmp;
-	ft_printf("sa\n");
-}
-
-void	swap_b(t_list *stack_b)
-{
-	int	tmp;
-
-	tmp = stack_b->next->content;
-	stack_b->next->content = stack_b->content;
-	stack_b->content = tmp;
-	ft_printf("sb\n");
+	tmp = stack->next->content;
+	stack->next->content = stack->content;
+	stack->content = tmp;
+	if (stack_c == 'a')
+		ft_printf("sa\n");
+	else if (stack_c == 'b')
+		ft_printf("sa\n");
 }
 
 void	swap_s(t_list *stack_a, t_list *stack_b)
@@ -45,42 +38,49 @@ void	swap_s(t_list *stack_a, t_list *stack_b)
 	ft_printf("ss\n");
 }
 
-void	push_b(t_list **stack_a, t_list **stack_b)
+void	push(t_list **stack_from, t_list **stack_to, char stack_c)
 {
 	t_list	*tmp;
 
-	ft_lstadd_front(stack_b, ft_lstnew((*stack_a)->content));
-	tmp = (*stack_a)->next;
-	ft_lstdelone(*stack_a);
-	*stack_a = tmp;
-	ft_printf("pb\n");
+	ft_lstadd_front(stack_to, ft_lstnew((*stack_from)->content));
+	tmp = (*stack_from)->next;
+	ft_lstdelone(*stack_from);
+	*stack_from = tmp;
+	if (stack_c == 'a')
+		ft_printf("pa\n");
+	else if (stack_c == 'b')
+		ft_printf("pb\n");
 }
 
-void	push_a(t_list **stack_a, t_list **stack_b)
+void	rotate(t_list *stack, char stack_c)
 {
-	t_list	*tmp;
+	int		fisrt_val;
+	int		tmp;
+	t_list	*cur;
 
-	ft_lstadd_front(stack_a, ft_lstnew((*stack_b)->content));
-	tmp = (*stack_b)->next;
-	ft_lstdelone(*stack_b);
-	*stack_b = tmp;
-	ft_printf("pa\n");
+	fisrt_val = stack->content;
+	cur = stack;
+	while (cur->next)
+	{
+		tmp = cur->next->content;
+		cur->content = tmp;
+		cur = cur->next;
+	}
+	cur->content = fisrt_val;
+	if (stack_c == 'a')
+		ft_printf("ra\n");
+	else if (stack_c == 'b')
+		ft_printf("rb\n");
 }
 
-void	reverse_rotate_a(t_list *stack_a)
+void	reverse_rotate(t_list *stack, char stack_c)
 {
 	int		last_val;
 	int		tmp;
-	t_list	*last;
 	t_list	*cur;
 
-	if (!stack_a || !stack_a->next)
-		return ;
-	last = stack_a;
-	while (last->next)
-		last = last->next;
-	last_val = last->content;
-	cur = stack_a;
+	last_val = ft_lstlast(stack)->content;
+	cur = stack;
 	while (cur)
 	{
 		tmp = cur->content;
@@ -88,22 +88,19 @@ void	reverse_rotate_a(t_list *stack_a)
 		last_val = tmp;
 		cur = cur->next;
 	}
-	ft_printf("rra\n");
+	if (stack_c == 'a')
+		ft_printf("rra\n");
+	else if (stack_c == 'b')
+		ft_printf("rrb\n");
 }
 
-void	reverse_rotate_b(t_list *stack_b)
+void	reverse_rotate_r(t_list *stack_a, t_list *stack_b)
 {
 	int		last_val;
 	int		tmp;
-	t_list	*last;
 	t_list	*cur;
 
-	if (!stack_b || !stack_b->next)
-		return ;
-	last = stack_b;
-	while (last->next)
-		last = last->next;
-	last_val = last->content;
+	last_val = ft_lstlast(stack_b)->content;
 	cur = stack_b;
 	while (cur)
 	{
@@ -112,45 +109,14 @@ void	reverse_rotate_b(t_list *stack_b)
 		last_val = tmp;
 		cur = cur->next;
 	}
-	ft_printf("rrb\n");
-}
-
-void	reverse_rotate_r(t_list *stack_a, t_list *stack_b)
-{
-	int		last_val;
-	int		tmp;
-	t_list	*last;
-	t_list	*cur;
-
-	if (stack_b && stack_b->next)
+	last_val = ft_lstlast(stack_a)->content;
+	cur = stack_a;
+	while (cur)
 	{
-		last = stack_b;
-		while (last->next)
-			last = last->next;
-		last_val = last->content;
-		cur = stack_b;
-		while (cur)
-		{
-			tmp = cur->content;
-			cur->content = last_val;
-			last_val = tmp;
-			cur = cur->next;
-		}
-	}
-	if (stack_a && stack_a->next)
-	{
-		last = stack_a;
-		while (last->next)
-			last = last->next;
-		last_val = last->content;
-		cur = stack_a;
-		while (cur)
-		{
-			tmp = cur->content;
-			cur->content = last_val;
-			last_val = tmp;
-			cur = cur->next;
-		}
+		tmp = cur->content;
+		cur->content = last_val;
+		last_val = tmp;
+		cur = cur->next;
 	}
 	ft_printf("rrr\n");
 }
