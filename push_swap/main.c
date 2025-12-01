@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 11:24:09 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/27 19:37:52 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/01 18:57:33 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,18 @@ static t_bool	check_argv(int argc, char *argv[])
 	return (SUCCESS);
 }
 
-static t_bool	lstis_sorted(t_list *stack, t_bool is_reversed)
-{
-	while (stack && stack->next)
-	{
-		if (!is_reversed && stack->content > stack->next->content)
-			return (0);
-		else if (is_reversed && stack->content < stack->next->content)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
+// static t_bool	lstis_sorted(t_list *stack, t_bool is_reversed)
+// {
+// 	while (stack && stack->next)
+// 	{
+// 		if (!is_reversed && stack->content > stack->next->content)
+// 			return (0);
+// 		else if (is_reversed && stack->content < stack->next->content)
+// 			return (0);
+// 		stack = stack->next;
+// 	}
+// 	return (1);
+// }
 
 // static t_list	*lstindex(t_list *stack_a, int index)
 // {
@@ -80,98 +80,107 @@ static t_bool	lstis_sorted(t_list *stack, t_bool is_reversed)
 // 	return (stack_a);
 // }
 
-static void	sort_algo(t_list **stack_a, t_list **stack_b)
+static int	lstbiggest_content(t_list *stack)
 {
-	while (!lstis_sorted(*stack_a, 0))
+	int	biggest;
+
+	biggest = INT_MIN;
+	while (stack)
 	{
-		while (*stack_a && !lstis_sorted(*stack_a, 0))
-		{
-			if (*stack_a && (*stack_a)->next
-				&& ft_lstlast(*stack_a)->content < (*stack_a)->content
-				&& *stack_b && (*stack_b)->next
-				&& ft_lstlast(*stack_b)->content > (*stack_b)->content)
-				reverse_rotate_r(*stack_a, *stack_b);
-			if (*stack_a && (*stack_a)->next
-				&& ft_lstlast(*stack_a)->content < (*stack_a)->content)
-				reverse_rotate(*stack_a, 'a');
-			if (*stack_a && (*stack_a)->next
-				&& (*stack_a)->content > (*stack_a)->next->content && *stack_b
-				&& (*stack_b)->next
-				&& (*stack_b)->content < (*stack_b)->next->content)
-				swap_s(*stack_a, *stack_b);
-			if (*stack_a && (*stack_a)->next
-				&& (*stack_a)->content > (*stack_a)->next->content)
-				swap(*stack_a, 'a');
-			push(stack_a, stack_b, 'b');
-		}
-		while (*stack_b)
-		{
-			if (*stack_a && (*stack_a)->next
-				&& ft_lstlast(*stack_a)->content < (*stack_a)->content
-				&& *stack_b && (*stack_b)->next
-				&& ft_lstlast(*stack_b)->content > (*stack_b)->content)
-				reverse_rotate_r(*stack_a, *stack_b);
-			if (*stack_b && (*stack_b)->next
-				&& ft_lstlast(*stack_b)->content > (*stack_b)->content)
-				reverse_rotate(*stack_b, 'b');
-			if (*stack_b && (*stack_b)->next
-				&& (*stack_b)->content < (*stack_b)->next->content && *stack_a
-				&& (*stack_a)->next
-				&& (*stack_a)->content > (*stack_a)->next->content)
-				swap_s(*stack_a, *stack_b);
-			if (*stack_b && (*stack_b)->next
-				&& (*stack_b)->content < (*stack_b)->next->content)
-				swap(*stack_b, 'b');
-			push(stack_b, stack_a, 'a');
-		}
+		if (biggest < stack->content)
+			biggest = stack->content;
+		stack = stack->next;
 	}
+	return (biggest);
 }
 
-// static void	lstbiggest_content(t_list *stack)
+// static int	lstlowest_content(t_list *stack)
 // {
-// 	int	biggest;
+// 	int	lowest;
 // 	int	size_stack;
-// 	int	i;
 
 // 	size_stack = ft_lstsize(stack);
-// 	biggest = 0;
-// 	i = 0;
-// 	while (i < size_stack)
+// 	lowest = INT_MAX;
+// 	while (stack->next)
 // 	{
-// 		if (biggest < stack->content)
-// 			biggest = stack->content;
+// 		if (lowest > stack->content)
+// 			lowest = stack->content;
 // 		stack = stack->next;
-// 		i++;
 // 	}
+// 	return (lowest);
 // }
 
-// static void	sort_algo(t_list **stack_a, t_list **stack_b)
+// static t_bool	no_more_valide_bits(t_list *stack, int count,
+// 		int biggest_content, int bits_to_find)
 // {
-// 	while (*stack_a)
+// 	int	number_bits;
+// 	int	i;
+
+// 	while (stack)
 // 	{
-// 		if (*stack_a && (*stack_a)->next
-// 			&& ft_lstlast(*stack_a)->content < (*stack_a)->content)
-// 			reverse_rotate(*stack_a, 'a');
-// 		else if (*stack_a && (*stack_a)->next
-// 			&& (*stack_a)->content > (*stack_a)->next->content)
-// 			swap(*stack_a, 'a');
-// 		else if (!*stack_b || (*stack_a)->content > (*stack_b)->content)
-// 			push(stack_a, stack_b, 'b');
-// 		else if (*stack_b && (*stack_a)->content < (*stack_b)->content)
+// 		number_bits = stack->content;
+// 		i = 0;
+// 		while (biggest_content - i > count)
 // 		{
-// 			rotate(*stack_a, 'a');
-// 			while (*stack_b
-// 				&& ft_lstlast(*stack_a)->content < (*stack_b)->content)
-// 				push(stack_b, stack_a, 'a');
-// 			reverse_rotate(*stack_a, 'a');
-// 			push(stack_a, stack_b, 'b');
+// 			number_bits >>= 1;
+// 			i++;
 // 		}
+// 		if (!bits_to_find && !(number_bits & 1))
+// 			return (0);
+// 		if (bits_to_find && (number_bits & 1))
+// 			return (0);
+// 		stack = stack->next;
 // 	}
-// 	while (*stack_b)
-// 	{
-// 		push(stack_b, stack_a, 'a');
-// 	}
+// 	return (1);
 // }
+
+static void	sort_algo(t_list **stack_a, t_list **stack_b)
+{
+	int	count;
+	int	biggest_content;
+	int	i;
+	int	size_stack;
+
+	biggest_content = lstbiggest_content(*stack_a);
+	count = 0;
+	while (biggest_content)
+	{
+		count++;
+		biggest_content >>= 1;
+	}
+	biggest_content = count;
+	while (count > 0)
+	{
+		i = 0;
+		size_stack = ft_lstsize(*stack_a);
+		while (*stack_a && i < size_stack)
+		{
+			if (!(((*stack_a)->content >> (biggest_content - count)) & 1))
+				push(stack_a, stack_b, 'b');
+			else
+				rotate(*stack_a, 'a');
+			i++;
+		}
+		i = 0;
+		size_stack = ft_lstsize(*stack_b);
+		if (count != biggest_content)
+		{
+			while (*stack_b && i < size_stack)
+			{
+				if (((*stack_b)->content >> (biggest_content - count)) & 1)
+					push(stack_b, stack_a, 'a');
+				else
+					rotate(*stack_b, 'b');
+				i++;
+			}
+		}
+		count--;
+	}
+	while (*stack_b)
+	{
+		push(stack_b, stack_a, 'a');
+	}
+}
 
 int	main(int argc, char *argv[])
 {

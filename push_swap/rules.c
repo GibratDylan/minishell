@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 15:10:10 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/27 19:00:27 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/01 12:52:09 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	swap(t_list *stack, char stack_c)
 	if (stack_c == 'a')
 		ft_printf("sa\n");
 	else if (stack_c == 'b')
-		ft_printf("sa\n");
+		ft_printf("sb\n");
 }
 
 void	swap_s(t_list *stack_a, t_list *stack_b)
@@ -71,6 +71,33 @@ void	rotate(t_list *stack, char stack_c)
 		ft_printf("ra\n");
 	else if (stack_c == 'b')
 		ft_printf("rb\n");
+}
+
+void	rotate_r(t_list *stack_a, t_list *stack_b)
+{
+	int		fisrt_val;
+	int		tmp;
+	t_list	*cur;
+
+	fisrt_val = stack_a->content;
+	cur = stack_a;
+	while (cur->next)
+	{
+		tmp = cur->next->content;
+		cur->content = tmp;
+		cur = cur->next;
+	}
+	cur->content = fisrt_val;
+	fisrt_val = stack_b->content;
+	cur = stack_b;
+	while (cur->next)
+	{
+		tmp = cur->next->content;
+		cur->content = tmp;
+		cur = cur->next;
+	}
+	cur->content = fisrt_val;
+	ft_printf("rr\n");
 }
 
 void	reverse_rotate(t_list *stack, char stack_c)
