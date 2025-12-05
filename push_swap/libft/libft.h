@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:48:36 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/26 16:55:45 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/04 13:34:53 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char					*ft_strrchr(const char *s, int c);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
 void					*ft_memchr(const void *s, int c, size_t n);
 int						ft_memcmp(const void *s1, const void *s2, size_t n);
-char					*ft_strnstr(const char *big, const char *little,
+int						ft_strnstr(const char *big, const char *little,
 							size_t len);
 int						ft_atoi(const char *nptr);
 char					*ft_strdup(const char *s);

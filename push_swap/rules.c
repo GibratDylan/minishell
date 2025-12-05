@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 15:10:10 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/01 12:52:09 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/05 11:14:54 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,30 @@ void	swap_s(t_list *stack_a, t_list *stack_b)
 	ft_printf("ss\n");
 }
 
-void	push(t_list **stack_from, t_list **stack_to, char stack_c)
+void	push(t_list **stack_from, t_list **stack_to, char stack_c,
+		char **result)
 {
 	t_list	*tmp;
+	char	*str;
 
 	ft_lstadd_front(stack_to, ft_lstnew((*stack_from)->content));
 	tmp = (*stack_from)->next;
 	ft_lstdelone(*stack_from);
 	*stack_from = tmp;
 	if (stack_c == 'a')
-		ft_printf("pa\n");
-	else if (stack_c == 'b')
-		ft_printf("pb\n");
+		str = ft_strjoin(*result, "pa\n");
+	else
+		str = ft_strjoin(*result, "pb\n");
+	free(*result);
+	*result = str;
 }
 
-void	rotate(t_list *stack, char stack_c)
+void	rotate(t_list *stack, char stack_c, char **result)
 {
 	int		fisrt_val;
 	int		tmp;
 	t_list	*cur;
+	char	*str;
 
 	fisrt_val = stack->content;
 	cur = stack;
@@ -68,9 +73,11 @@ void	rotate(t_list *stack, char stack_c)
 	}
 	cur->content = fisrt_val;
 	if (stack_c == 'a')
-		ft_printf("ra\n");
-	else if (stack_c == 'b')
-		ft_printf("rb\n");
+		str = ft_strjoin(*result, "ra\n");
+	else
+		str = ft_strjoin(*result, "rb\n");
+	free(*result);
+	*result = str;
 }
 
 void	rotate_r(t_list *stack_a, t_list *stack_b)
@@ -100,11 +107,12 @@ void	rotate_r(t_list *stack_a, t_list *stack_b)
 	ft_printf("rr\n");
 }
 
-void	reverse_rotate(t_list *stack, char stack_c)
+void	reverse_rotate(t_list *stack, char stack_c, char **result)
 {
 	int		last_val;
 	int		tmp;
 	t_list	*cur;
+	char	*str;
 
 	last_val = ft_lstlast(stack)->content;
 	cur = stack;
@@ -116,9 +124,11 @@ void	reverse_rotate(t_list *stack, char stack_c)
 		cur = cur->next;
 	}
 	if (stack_c == 'a')
-		ft_printf("rra\n");
-	else if (stack_c == 'b')
-		ft_printf("rrb\n");
+		str = ft_strjoin(*result, "rra\n");
+	else
+		str = ft_strjoin(*result, "rrb\n");
+	free(*result);
+	*result = str;
 }
 
 void	reverse_rotate_r(t_list *stack_a, t_list *stack_b)
