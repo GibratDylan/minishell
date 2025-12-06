@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 11:24:22 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/02 16:23:07 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/06 18:58:09 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,9 @@ typedef struct s_chunk
 	int				max_range;
 }					t_chunk;
 
-void				swap(t_stack *stack, char stack_c);
-void				push(t_stack *stack, char stack_c);
-void				swap_s(t_stack *stack);
-void				rotate(t_stack *stack, char stack_c);
-void				rotate_r(t_stack *stack);
-void				reverse_rotate(t_stack *stack, char stack_c);
-void				reverse_rotate_r(t_stack *stack);
+void				swap(t_stack *stack, char stack_c, char **result);
+void				push(t_stack *stack, char stack_c, char **result);
+void				rotate(t_stack *stack, char stack_c, char **result);
+void				reverse_rotate(t_stack *stack, char stack_c, char **result);
 
 #endif
