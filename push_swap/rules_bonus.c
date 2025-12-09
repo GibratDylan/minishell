@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   rules_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 10:43:18 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/06 19:01:54 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/09 16:09:47 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/09 16:23:17 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap_bonus.h"
 
-int	ft_strnstr(const char *big, const char *little, size_t len)
+void	swap(t_all_stack *stack)
 {
-	unsigned long	i;
-	size_t			len_little;
+	swap_a(stack);
+	swap_b(stack);
+}
 
-	len_little = ft_strlen(little);
-	if (len_little == 0)
-		return (0);
-	if (big == NULL || len == 0 || len < len_little)
-		return (0);
-	i = 0;
-	while (big[i] && i < len - len_little + 1)
-	{
-		if (ft_strncmp(little, &big[i], len_little) == 0)
-			return (i);
-		i++;
-	}
-	return (0);
+void	rotate(t_all_stack *stack)
+{
+	rotate_a(stack);
+	rotate_b(stack);
+}
+
+void	reverse_rotate(t_all_stack *stack)
+{
+	reverse_rotate_a(stack);
+	reverse_rotate_b(stack);
 }

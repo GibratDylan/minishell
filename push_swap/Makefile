@@ -6,30 +6,34 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 11:36:20 by dgibrat           #+#    #+#              #
-#    Updated: 2025/12/01 10:56:44 by dgibrat          ###   ########.fr        #
+#    Updated: 2025/12/09 16:57:43 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
+NAME_BONUS = checker
+
 CC = cc
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC = main.c rules.c
+SRC = main.c rules_a.c rules_b.c init.c recursive_chunk.c sort.c turkish.c utils.c turkish_2.c recursive_chunk_2.c
+
+SRC_BONUS = main_bonus.c init_bonus.c rules_a_bonus.c rules_b_bonus.c rules_bonus.c utils_bonus.c
 
 OBJ = $(SRC:.c=.o)
 
+OBJ_BONUS =  $(SRC_BONUS:.c=.o)
+
 LIBFTPATH = libft
 
-LIBFT = libft.a
+all: libft $(NAME)
 
-all: $(LIBFT) $(NAME)
+$(NAME): $(OBJ) libft
+	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -L$(LIBFTPATH) -lft
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(FLAGS) $(NAME) $(OBJ) $(LIBFTPATH)/$(LIBFT)
-
-$(LIBFT):
+libft:
 	$(MAKE) -C $(LIBFTPATH)
 
 %.o : %.c
@@ -45,8 +49,13 @@ fclean: clean
 
 re: fclean all
 
-test: $(OBJ) $(LIBFT)
-	gcc -g -O0 $(OBJ) -o $(NAME) -L$(LIBFTPATH) -lft -no-pie
-	valgrind -q --leak-check=full --show-reachable=yes --track-origins=yes --tool=memcheck ./$(NAME) 5 55 44 91 96 61 30 63 72 70 83 9 25 42 57 69 26 88 36 59 82 94 51 6 84 4 49 58 48 76 23 27 81 62 79 86 10 17 12 52 75 67 13 77 41 90 50 53 8 32 14 16 98 80 40 99 89 46 97 68 71 95 19 54 29 1 65 21 43 37 74 24 3 39 73 93 18 60 87 15 85 47 78 22 100 33 34 35 11 64 56 20 2 31 38 45 66 7 28 92
+bonus: libft $(NAME_BONUS)
 
-.PHONY: all fclean clean re test
+$(NAME_BONUS): $(OBJ_BONUS) libft
+	$(CC) $(FLAGS) $(OBJ_BONUS) -o $(NAME_BONUS) -L$(LIBFTPATH) -lft
+
+test: $(OBJ) libft
+	gcc -g -O0 $(OBJ) -o $(NAME) -L$(LIBFTPATH) -lft -no-pie
+	valgrind -q --leak-check=full --show-reachable=yes --track-origins=yes --tool=memcheck ./$(NAME) 1
+
+.PHONY: all libft clean fclean bonus test
