@@ -6,20 +6,20 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:39:38 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 11:50:30 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 14:43:00 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 
-void	free_all(t_all_stack *stack)
+void	free_all(t_all_stack *stack, char **argv)
 {
 	free(stack->stack_a->stack);
 	free(stack->stack_b->stack);
+	ft_free_array(argv);
 }
 
-t_bool	init_struct_circular_buffer(t_stack *stack_a, t_stack *stack_b,
-		int size)
+t_bool	init_circular(t_stack *stack_a, t_stack *stack_b, int size)
 {
 	stack_a->stack = ft_calloc(size, sizeof(int));
 	if (!stack_a->stack)
@@ -41,7 +41,7 @@ t_bool	check_argv(int argc, char *argv[])
 	char	*result;
 	int		i;
 
-	i = 1;
+	i = 0;
 	while (i < argc)
 	{
 		result = ft_itoa(ft_atoi(argv[i]));
@@ -61,7 +61,7 @@ t_bool	set_stack(t_all_stack *stack, int argc, char *argv[])
 	int	i;
 	int	j;
 
-	j = 1;
+	j = 0;
 	while (j < argc)
 	{
 		content = ft_atoi(argv[j]);
@@ -71,7 +71,7 @@ t_bool	set_stack(t_all_stack *stack, int argc, char *argv[])
 			if (content == stack->stack_a->stack[i++])
 				return (FAIL);
 		}
-		stack->stack_a->stack[j - 1] = content;
+		stack->stack_a->stack[j] = content;
 		stack->stack_a->size++;
 		j++;
 	}

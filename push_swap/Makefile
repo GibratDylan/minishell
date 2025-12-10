@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/26 11:36:20 by dgibrat           #+#    #+#              #
-#    Updated: 2025/12/10 11:49:00 by dgibrat          ###   ########.fr        #
+#    Updated: 2025/12/10 14:31:37 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ $(NAME_BONUS): $(OBJ_BONUS)
 
 test: $(OBJ) $(LIBFT)
 	gcc -g -O0 $(OBJ) -o $(NAME) -L$(LIBFTPATH) -lft -no-pie
-	valgrind -q --leak-check=full --show-reachable=yes --track-origins=yes --tool=memcheck ./$(NAME) 72 32 13 3 54 56 12 89 38 29 90 85 81 86 64 35 76 10 20 75 14 84 48 83 7 9 60 97 25 36 37 40 41 28 23 68 22 78 17 98 0 44 43 19 24 58 80 5 50 16 71 62 93 30 39 73 67 45 79 1 42 47 61 95 27 53 70 4 51 52 65 2 49 63 77 57 99 33 82 94 96 11 88 46 87 92 59 18 34 26 15 74 8 31 91 55 21 66 69 6
+	valgrind -q --leak-check=full --show-reachable=yes --track-origins=yes --tool=memcheck ./$(NAME) "72 32 13 3 54 56 12 89 38 29 90 85 81 86 64 35 76 10 20 75 14 84 48 83 7 9 60 97 25 36 37 40 41 28 23 68 22 78 17 98 0 44 43 19 24 58 80 5 50 16 71 62 93 30 39 73 67 45 79 1 42 47 61 95 27 53 70 4 51 52 65 2 49 63 77 57 99 33 82 94 96 11 88 46 87 92 59 18 34 26 15 74 8 31 91 55 21 66 69 6"
 
 test_bonus: $(OBJ_BONUS) $(LIBFT)
 	gcc -g -O0 $(OBJ_BONUS) -o $(NAME_BONUS) -L$(LIBFTPATH) -lft -no-pie

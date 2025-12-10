@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:47:00 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/08 19:22:39 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 14:34:36 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ t_bool	check_argv(int argc, char *argv[])
 {
 	char	*result;
 
-	while (argc > 1)
+	while (argc > 0)
 	{
-		result = ft_itoa(ft_atoi(argv[argc - 1]));
+		result = ft_itoa(ft_atoi(argv[argc]));
 		if (result == NULL)
 			return (FAIL);
-		if (ft_strncmp(argv[argc - 1], result, ft_strlen(argv[argc - 1])))
+		if (ft_strncmp(argv[argc], result, ft_strlen(argv[argc])))
 			return (free(result), FAIL);
 		free(result);
 		argc--;
@@ -87,7 +87,7 @@ t_bool	is_not_sorted(t_stack *stack)
 	return (SUCCESS);
 }
 
-void	free_all(t_stack stack, t_chunk *chunk, char *result)
+void	free_all(t_stack stack, t_chunk *chunk, char *result, char **argv)
 {
 	free(stack.stack_a);
 	free(stack.stack_b);
@@ -96,4 +96,5 @@ void	free_all(t_stack stack, t_chunk *chunk, char *result)
 	free(chunk->max);
 	free(chunk);
 	free(result);
+	ft_free_array(argv);
 }

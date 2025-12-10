@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:32:45 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 11:37:23 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 14:42:48 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ typedef struct s_all_stack
 
 int			next_circular(t_stack *stack, int nbr, int cap);
 int			prev_circular(t_stack *stack, int nbr, int cap);
-t_bool		init_struct_circular_buffer(t_stack *stack_a, t_stack *stack_b,
-				int size);
+t_bool		init_circular(t_stack *stack_a, t_stack *stack_b, int size);
 t_bool		check_argv(int argc, char *argv[]);
 t_bool		set_stack(t_all_stack *stack, int argc, char *argv[]);
 void		sort_with_operation(t_all_stack *stack, char **operation);
-void		free_all(t_all_stack *stack);
+void		free_all(t_all_stack *stack, char **argv);
 void		swap_a(t_all_stack *stack);
 void		swap_b(t_all_stack *stack);
 void		swap(t_all_stack *stack);

@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:40:34 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/08 18:53:17 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 14:35:15 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ t_bool	malloc_init_stack(int argc, char *argv[], t_stack *stack)
 	int	i;
 	int	j;
 
-	stack->stack_a = malloc((argc - 1) * sizeof(int));
+	stack->stack_a = malloc((argc) * sizeof(int));
 	if (stack->stack_a == NULL)
 		return (FAIL);
-	stack->stack_b = malloc((argc - 1) * sizeof(int));
+	stack->stack_b = malloc((argc) * sizeof(int));
 	if (stack->stack_b == NULL)
 		return (SUCCESS);
-	j = 1;
+	j = 0;
 	while (j < argc)
 	{
 		content = ft_atoi(argv[j]);

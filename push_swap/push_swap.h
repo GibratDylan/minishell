@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 11:24:22 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/09 12:53:52 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 14:29:43 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ t_bool				check_argv(int argc, char *argv[]);
 int					get_lowest(int *tmp, t_stack *stack);
 t_bool				compress_value(t_stack *stack);
 t_bool				is_not_sorted(t_stack *stack);
-void				free_all(t_stack stack, t_chunk *chunk, char *result);
+void				free_all(t_stack stack, t_chunk *chunk, char *result,
+						char **argv);
 int					lowest_a(t_stack *stack);
 int					index_to_go(t_stack *stack, int nbr);
 t_bool				move_index(t_stack *stack, int index, char **result);
