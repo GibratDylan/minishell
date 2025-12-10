@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:39:38 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 14:43:00 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 15:16:06 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	free_all(t_all_stack *stack, char **argv)
 
 t_bool	init_circular(t_stack *stack_a, t_stack *stack_b, int size)
 {
-	stack_a->stack = ft_calloc(size, sizeof(int));
+	stack_a->stack = malloc(size * sizeof(int));
 	if (!stack_a->stack)
-		return (free(stack_a->stack), free(stack_b->stack), FAIL);
-	stack_b->stack = ft_calloc(size, sizeof(int));
+		return (FAIL);
+	stack_b->stack = malloc(size * sizeof(int));
 	if (!stack_b->stack)
-		return (free(stack_a->stack), free(stack_b->stack), FAIL);
+		return (free(stack_a->stack), FAIL);
 	stack_a->top = 0;
 	stack_a->size = 0;
 	stack_a->cap = size;
