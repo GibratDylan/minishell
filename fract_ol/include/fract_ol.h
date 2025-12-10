@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   fract_ol.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 15:36:09 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 18:58:31 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/10 16:05:23 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/10 16:34:53 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FRACT_OL_H
+# define FRACT_OL_H
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	size_t	len_s;
-	char	*subs;
+# include "../../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
 
-	len_s = ft_strlen(s);
-	if (len_s < start)
-		return (ft_strdup(""));
-	if (len > len_s - start)
-		len = len_s - start;
-	subs = ft_malloc(len + 1, sizeof(char));
-	if (subs == NULL)
-		return (NULL);
-	ft_strlcpy(subs, &s[start], len + 1);
-	return (subs);
-}
+#endif

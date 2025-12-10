@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 15:36:09 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 18:58:31 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/10 16:04:40 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/10 16:48:28 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/fract_ol.h"
+#include "fcntl.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+int	main(void)
 {
-	size_t	len_s;
-	char	*subs;
+	int		fd;
+	char	*line;
 
-	len_s = ft_strlen(s);
-	if (len_s < start)
-		return (ft_strdup(""));
-	if (len > len_s - start)
-		len = len_s - start;
-	subs = ft_malloc(len + 1, sizeof(char));
-	if (subs == NULL)
-		return (NULL);
-	ft_strlcpy(subs, &s[start], len + 1);
-	return (subs);
+	fd = open("/home/dgibrat/Project/Home/fract_ol/minilibx-linux/man/man1/mlx_loop.1",
+			O_RDONLY);
+	while ((line = get_next_line(fd)))
+		ft_printf("%s", line);
 }

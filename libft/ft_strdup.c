@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:49:13 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/10 10:13:10 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 18:57:20 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strdup(const char *s)
 	len_src = ft_strlen(s);
 	if (s == NULL || len_src + 1 > ULONG_MAX / sizeof(char))
 		return (NULL);
-	dest = malloc((sizeof(char) * len_src) + 1);
+	dest = ft_malloc(len_src + 1, sizeof(char));
 	if (dest == NULL)
 		return (NULL);
 	i = 0;

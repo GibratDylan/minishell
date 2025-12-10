@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 10:42:43 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/20 13:50:56 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 18:56:19 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**ft_split(char const *s, char c)
 	unsigned int	start;
 	char			**array;
 
-	array = ft_calloc((ft_len_array(s, c) + 1), sizeof(char *));
+	array = ft_malloc((ft_len_array(s, c) + 1), sizeof(char *));
 	if (array == NULL)
 		return (NULL);
 	i = 0;
@@ -49,7 +49,7 @@ char	**ft_split(char const *s, char c)
 		{
 			array[j] = ft_substr(s, start, i - start + 1);
 			if (array[j++] == NULL)
-				return (ft_free_array(array));
+				return (NULL);
 		}
 		i++;
 	}

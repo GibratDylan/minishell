@@ -6,13 +6,13 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 17:46:26 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/20 13:53:25 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 16:12:47 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int start, int c)
 {
 	unsigned long	i;
 	char			c_c;
@@ -20,14 +20,16 @@ char	*ft_strchr(const char *s, int c)
 	c_c = (char)c;
 	if (s == NULL)
 		return (NULL);
+	if (c_c == '\0')
+		return ((char *)&s[ft_strlen(s)]);
 	i = 0;
+	if (start >= 0)
+		i = start;
 	while (s[i] != '\0')
 	{
 		if (c_c == s[i])
 			return ((char *)&s[i]);
 		i++;
 	}
-	if (c_c == '\0')
-		return ((char *)s + i);
 	return (NULL);
 }

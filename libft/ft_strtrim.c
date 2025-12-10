@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 17:32:40 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/13 19:32:51 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 16:33:32 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	len_s1 = ft_strlen(s1);
 	i = 0;
-	while (i < len_s1 && ft_strchr(set, s1[i]))
+	while (i < len_s1 && ft_strchr(set, 0, s1[i]))
 		i++;
 	start = i;
 	i = 0;
-	while (i < len_s1 && ft_strchr(set, s1[len_s1 - i - 1]))
+	while (i < len_s1 && ft_strchr(set, 0, s1[len_s1 - i - 1]))
 		i++;
 	return (ft_substr(s1, start, len_s1 - i - start));
 }
