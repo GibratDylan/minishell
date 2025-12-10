@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 11:24:09 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/08 19:22:25 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 11:27:24 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,17 @@ int	main(int argc, char *argv[])
 	stack_b = NULL;
 	init_struct(&stack, stack_a, stack_b);
 	if (argc < 3 || check_argv(argc, argv))
-		return (ft_printf("Error\n"), SUCCESS);
+		return (ft_putstr_fd("Error\n", 2), SUCCESS);
 	if (malloc_chunk(&chunk))
-		return (ft_printf("Error\n"), SUCCESS);
+		return (ft_putstr_fd("Error\n", 2), SUCCESS);
 	if (malloc_init_stack(argc, argv, &stack) || compress_value(&stack))
-		return (free_all(stack, chunk, result), ft_printf("Error\n"), SUCCESS);
+		return (free_all(stack, chunk, result), ft_putstr_fd("Error\n", 2),
+			SUCCESS);
 	init_chunk(chunk, TOP_A);
 	set_range_chunk(chunk, 0, stack.size_a);
 	if (sort_algo(&stack, chunk, &result))
-		return (free_all(stack, chunk, result), ft_printf("Error\n"), SUCCESS);
+		return (free_all(stack, chunk, result), ft_putstr_fd("Error\n", 2),
+			SUCCESS);
 	if (result)
 		ft_printf("%s", result);
 	return (free_all(stack, chunk, result), SUCCESS);

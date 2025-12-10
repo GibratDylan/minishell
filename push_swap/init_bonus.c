@@ -6,27 +6,27 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:39:38 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/09 17:19:52 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 11:50:30 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 
-void	free_all(t_stack *stack_a, t_stack *stack_b)
+void	free_all(t_all_stack *stack)
 {
-	free(stack_a->stack);
-	free(stack_b->stack);
+	free(stack->stack_a->stack);
+	free(stack->stack_b->stack);
 }
 
 t_bool	init_struct_circular_buffer(t_stack *stack_a, t_stack *stack_b,
 		int size)
 {
-	stack_a->stack = malloc(size * sizeof(int));
+	stack_a->stack = ft_calloc(size, sizeof(int));
 	if (!stack_a->stack)
-		return (free_all(stack_a, stack_b), FAIL);
-	stack_b->stack = malloc(size * sizeof(int));
+		return (free(stack_a->stack), free(stack_b->stack), FAIL);
+	stack_b->stack = ft_calloc(size, sizeof(int));
 	if (!stack_b->stack)
-		return (free_all(stack_a, stack_b), FAIL);
+		return (free(stack_a->stack), free(stack_b->stack), FAIL);
 	stack_a->top = 0;
 	stack_a->size = 0;
 	stack_a->cap = size;
@@ -39,39 +39,66 @@ t_bool	init_struct_circular_buffer(t_stack *stack_a, t_stack *stack_b,
 t_bool	check_argv(int argc, char *argv[])
 {
 	char	*result;
+	int		i;
 
-	while (argc > 1)
+	i = 1;
+	while (i < argc)
 	{
-		result = ft_itoa(ft_atoi(argv[argc - 1]));
+		result = ft_itoa(ft_atoi(argv[i]));
 		if (result == NULL)
 			return (FAIL);
-		if (ft_strncmp(argv[argc - 1], result, ft_strlen(argv[argc - 1])))
+		if (ft_strncmp(argv[i], result, ft_strlen(argv[i])))
 			return (free(result), FAIL);
 		free(result);
-		argc--;
+		i++;
 	}
 	return (SUCCESS);
 }
 
 t_bool	set_stack(t_all_stack *stack, int argc, char *argv[])
 {
-	int		content;
-	size_t	i;
-	int		j;
+	int	content;
+	int	i;
+	int	j;
 
-	j = 0;
-	while (j + 1 < argc)
+	j = 1;
+	while (j < argc)
 	{
-		content = ft_atoi(argv[j + 1]);
+		content = ft_atoi(argv[j]);
 		i = 0;
 		while (i < stack->stack_a->size)
 		{
 			if (content == stack->stack_a->stack[i++])
 				return (FAIL);
 		}
-		stack->stack_a->stack[j] = content;
+		stack->stack_a->stack[j - 1] = content;
 		stack->stack_a->size++;
 		j++;
 	}
 	return (SUCCESS);
+}
+
+void	read_stdin(char **result)
+{
+	char	buffer[2];
+	int		size_read;
+	char	*tmp;
+
+	size_read = 1;
+	*result = NULL;
+	while (size_read > 0)
+	{
+		size_read = read(0, buffer, 1);
+		if (size_read < 0)
+			return ;
+		buffer[size_read] = '\0';
+		tmp = ft_strjoin(*result, buffer);
+		if (tmp == NULL)
+		{
+			free(*result);
+			return ;
+		}
+		free(*result);
+		*result = tmp;
+	}
 }

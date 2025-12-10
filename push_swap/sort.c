@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:42:14 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/08 19:23:29 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 11:58:21 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,33 +83,14 @@ t_bool	sort_three_a(t_stack *stack, char **result)
 	b = stack->stack_a[1];
 	c = stack->stack_a[2];
 	if (a > b && b < c && a < c)
-	{
-		if (swap_a(stack, result))
-			return (FAIL);
-	}
+		return (swap_a(stack, result));
 	else if (a > b && b > c)
-	{
-		if (swap_a(stack, result))
-			return (FAIL);
-		if (reverse_rotate_a(stack, result))
-			return (FAIL);
-	}
+		return (swap_a(stack, result) || reverse_rotate_a(stack, result));
 	else if (a > b && b < c && a > c)
-	{
-		if (rotate_a(stack, result))
-			return (FAIL);
-	}
+		return (rotate_a(stack, result));
 	else if (a < b && b > c && a < c)
-	{
-		if (swap_a(stack, result))
-			return (FAIL);
-		if (rotate_a(stack, result))
-			return (FAIL);
-	}
+		return (swap_a(stack, result) || rotate_a(stack, result));
 	else if (a < b && b > c && a > c)
-	{
-		if (reverse_rotate_a(stack, result))
-			return (FAIL);
-	}
+		return (reverse_rotate_a(stack, result));
 	return (SUCCESS);
 }

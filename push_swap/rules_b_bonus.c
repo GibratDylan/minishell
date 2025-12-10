@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 16:01:34 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/09 19:10:13 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/10 12:00:29 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	swap_b(t_all_stack *stack)
 	if (stack->stack_b->size < 2)
 		return ;
 	idx1 = stack->stack_b->top;
-	idx2 = (stack->stack_b->top + 1) % stack->stack_b->size;
+	idx2 = next_circular(stack->stack_b, 1, stack->stack_b->cap);
 	tmp = stack->stack_b->stack[idx1];
 	stack->stack_b->stack[idx1] = stack->stack_b->stack[idx2];
 	stack->stack_b->stack[idx2] = tmp;
@@ -29,41 +29,36 @@ void	swap_b(t_all_stack *stack)
 
 void	push_b(t_all_stack *stack)
 {
-	int		i;
-	int		new_size;
-	int		current_idx;
 	t_stack	*stack_b;
 
 	stack_b = stack->stack_b;
 	if (stack->stack_a->size == 0)
 		return ;
-	new_size = stack_b->size + 1;
-	i = stack_b->size - 1;
-	while (i >= 0)
-	{
-		current_idx = (stack_b->top + i + 1) % new_size;
-		stack_b->stack[current_idx] = stack_b->stack[(stack_b->top + i)
-			% stack_b->size];
-		i--;
-	}
-	stack_b->top = (stack_b->top - 1 + new_size) % new_size;
+	stack_b->top = prev_circular(stack_b, 1, stack_b->cap);
 	stack_b->stack[stack_b->top] = stack->stack_a->stack[stack->stack_a->top];
-	stack->stack_a->top = (stack->stack_a->top + 1) % stack->stack_a->size;
+	stack->stack_a->top = next_circular(stack->stack_a, 1, stack->stack_a->cap);
 	stack->stack_a->size--;
-	stack_b->size = new_size;
+	stack_b->size++;
 }
 
 void	rotate_b(t_all_stack *stack)
 {
-	if (stack->stack_b->size == 0)
+	if (stack->stack_b->size < 2)
 		return ;
-	stack->stack_b->top = (stack->stack_b->top + 1) % stack->stack_b->size;
+	stack->stack_b->stack[next_circular(stack->stack_b, stack->stack_b->size,
+			stack->stack_b->cap)] = stack->stack_b->stack[stack->stack_b->top];
+	stack->stack_b->top = next_circular(stack->stack_b, 1, stack->stack_b->cap);
 }
 
 void	reverse_rotate_b(t_all_stack *stack)
 {
-	if (stack->stack_b->size == 0)
+	t_stack	*stack_b;
+
+	stack_b = stack->stack_b;
+	if (stack_b->size < 2)
 		return ;
-	stack->stack_b->top = (stack->stack_b->top - 1 + stack->stack_b->size)
-		% stack->stack_b->size;
+	stack_b->stack[prev_circular(stack_b, 1,
+			stack_b->cap)] = stack_b->stack[next_circular(stack_b, stack_b->size
+			- 1, stack_b->cap)];
+	stack_b->top = prev_circular(stack_b, 1, stack_b->cap);
 }
