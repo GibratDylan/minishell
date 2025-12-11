@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:41:22 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 20:04:57 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/11 10:37:35 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ft_count_and_write(char *tmp)
 
 	count = ft_strlen(tmp);
 	ft_putstr_fd(tmp, 1);
-	free_malloc(tmp);
+	ft_free_malloc(tmp);
 	return (count);
 }
 

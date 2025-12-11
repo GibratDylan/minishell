@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 17:52:13 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/11 09:15:00 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/11 10:01:25 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/11 10:09:05 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_isascii(int c)
+size_t	ft_tablen(void **tab)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	else
+	size_t	len;
+
+	if (!tab)
 		return (0);
+	len = 0;
+	while (tab[len])
+		len++;
+	return (len);
 }

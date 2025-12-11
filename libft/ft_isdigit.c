@@ -6,11 +6,13 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:07:31 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/03 17:51:00 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/11 09:15:02 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+#include "libft.h"
+
+t_bool	ft_isdigit(int c)
 {
 	if (c >= 48 && c <= 57)
 	{

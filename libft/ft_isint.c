@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_isint.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 17:52:13 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/11 09:15:00 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/11 09:36:39 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/11 10:18:44 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_isascii(int c)
+t_bool	ft_isint(char *str)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	else
+	char	*result;
+
+	if (!str)
 		return (0);
+	result = ft_itoa(ft_atoi(str));
+	if (ft_isnumber(str) && !ft_strncmp(str, result, ft_strlen(str)))
+		return (ft_free_malloc(result), 1);
+	else
+		return (ft_free_malloc(result), 0);
 }

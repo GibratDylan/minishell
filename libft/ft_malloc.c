@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:57:39 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 20:11:22 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/11 10:47:06 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_list	**get_malloc_list(void)
 	return (&malloc_list);
 }
 
-void	free_all_malloc(void)
+void	ft_free_all_malloc(void)
 {
 	t_list	**malloc_list;
 	t_list	*current;
@@ -37,19 +37,7 @@ void	free_all_malloc(void)
 	*malloc_list = NULL;
 }
 
-static void	free_node(t_list **malloc_list)
-{
-	t_list	*tmp;
-
-	free((*malloc_list)->content);
-	(*malloc_list)->content = NULL;
-	tmp = *malloc_list;
-	*malloc_list = (*malloc_list)->next;
-	free(tmp);
-	tmp = NULL;
-}
-
-void	free_malloc(void *ptr)
+void	ft_free_malloc(void *ptr)
 {
 	t_list	**malloc_list;
 	t_list	*current;
@@ -82,18 +70,18 @@ void	*ft_malloc(size_t nmemb, size_t size)
 {
 	t_list	**malloc_list;
 	void	*result;
-	t_list	*new_node;
+	t_list	*new;
 
 	malloc_list = get_malloc_list();
 	result = ft_calloc(nmemb, size);
 	if (!result)
-		return (free_all_malloc(), NULL);
-	new_node = ft_lstnew(result);
-	if (!new_node)
-		return (free_all_malloc(), NULL);
+		return (ft_free_all_malloc(), NULL);
+	new = new_node(result);
+	if (!new)
+		return (ft_free_all_malloc(), NULL);
 	if (!*malloc_list)
-		*malloc_list = new_node;
+		*malloc_list = new;
 	else
-		ft_lstadd_back(malloc_list, new_node);
+		ft_lstadd_back(malloc_list, new);
 	return (result);
 }

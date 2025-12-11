@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 17:52:13 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/11 09:15:00 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/11 08:55:24 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/11 08:56:48 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_isascii(int c)
+int	ft_abs(int value)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
+	if (value > 0)
+		return (value);
 	else
-		return (0);
+		return (value * -1);
 }

@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/03 16:57:37 by dgibrat           #+#    #+#              #
-#    Updated: 2025/12/10 19:23:00 by dgibrat          ###   ########.fr        #
+#    Updated: 2025/12/11 11:17:46 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_strd
 ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c\
 ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_malloc.c\
 ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c get_next_line.c\
-ft_printf.c ft_itoa_base.c ft_strdup_null.c
+ft_printf.c ft_itoa_base.c ft_strdup_null.c ft_abs.c ft_min.c ft_max.c ft_swap.c ft_isspace.c\
+ft_isnumber.c ft_isint.c ft_tablen.c ft_free_tab.c ft_malloc_2.c ft_realloc.c
 
 OBJS = $(SCRS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 09:54:02 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 18:53:52 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/11 10:23:34 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*node;
 
-	node = malloc(sizeof(t_list));
+	node = ft_malloc(1, sizeof(t_list));
 	if (node == NULL)
 		return (NULL);
 	node->content = content;

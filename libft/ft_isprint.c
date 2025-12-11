@@ -6,11 +6,13 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:57:55 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/11/03 17:59:25 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/11 09:15:11 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int c)
+#include "libft.h"
+
+t_bool	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)
 		return (1);

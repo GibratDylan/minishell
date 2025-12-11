@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:48:36 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 18:52:22 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/11 11:05:59 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int						ft_printf(const char *str, ...);
 char					*ft_itoa_base(unsigned long long n, char *base,
 							t_bool is_address);
 char					*ft_strdup_null(const char *s);
-int						ft_isalpha(int str);
-int						ft_isdigit(int str);
-int						ft_isalnum(int c);
-int						ft_isascii(int c);
-int						ft_isprint(int c);
+t_bool					ft_isalpha(int str);
+t_bool					ft_isdigit(int str);
+t_bool					ft_isalnum(int c);
+t_bool					ft_isascii(int c);
+t_bool					ft_isprint(int c);
 size_t					ft_strlen(const char *s);
 void					*ft_memset(void *s, int c, size_t n);
 void					ft_bzero(void *s, size_t n);
@@ -82,9 +82,22 @@ void					ft_lstclear(t_list **lst, void (*del)(void *));
 void					ft_lstiter(t_list *lst, void (*f)(void *));
 t_list					*ft_lstmap(t_list *lst, void *(*f)(void *),
 							void (*del)(void *));
-char					*get_next_line(int fd);
+char					*get_next_line(int fd, int free_line_fd);
 void					*ft_malloc(size_t nmemb, size_t size);
-void					free_malloc(void *ptr);
-void					free_all_malloc(void);
+void					ft_free_malloc(void *ptr);
+void					ft_free_all_malloc(void);
+int						ft_abs(int value);
+t_bool					ft_min(int min, int max);
+t_bool					ft_max(int min, int max);
+void					ft_swap(int *nbr1, int *nbr2);
+t_bool					ft_isspace(char c);
+t_bool					ft_isnumber(const char *str);
+t_bool					ft_isint(char *str);
+size_t					ft_tablen(void **tab);
+void					ft_free_tab(void **tab);
+t_list					*new_node(void *content);
+void					free_node(t_list **malloc_list);
+void					*ft_realloc(void *ptr, size_t size_before,
+							size_t size_after);
 
 #endif

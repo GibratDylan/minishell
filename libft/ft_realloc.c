@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/03 17:52:13 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/11 09:15:00 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/11 10:13:30 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/11 11:14:49 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_isascii(int c)
+void	*ft_realloc(void *ptr, size_t size_before, size_t size_after)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	else
-		return (0);
+	void	*result;
+
+	result = NULL;
+	if (size_after > 0)
+	{
+		result = ft_malloc(1, size_after);
+		if (size_before < size_after)
+			ft_memcpy(result, ptr, size_before);
+		else
+			ft_memcpy(result, ptr, size_after);
+	}
+	ft_free_malloc(ptr);
+	return (result);
 }

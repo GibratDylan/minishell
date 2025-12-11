@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 17:23:04 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 19:01:52 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/11 10:37:33 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	read_in_file(char **line, int fd, size_t total, char *buffer)
 		tmp = ft_strjoin(*line, buffer, total);
 		if (tmp == NULL)
 			return (0);
-		free_malloc(*line);
+		ft_free_malloc(*line);
 		*line = tmp;
 		total += size_read;
 	}
@@ -51,17 +51,19 @@ static char	*get_first_line(char **line)
 	if (result == NULL)
 		return (NULL);
 	tmp = ft_substr(*line, i, ft_strlen(*line));
-	free_malloc(*line);
+	ft_free_malloc(*line);
 	*line = tmp;
 	return (result);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int free_line_fd)
 {
 	static char	*line[1025];
 	char		*buffer;
 	char		*result;
 
+	if (free_line_fd)
+		return (ft_free_malloc(&(line[fd])), NULL);
 	if (fd >= 0 && fd <= 1024 && BUFFER_SIZE > 0)
 	{
 		buffer = ft_malloc(BUFFER_SIZE + 1, sizeof(char));
@@ -69,7 +71,7 @@ char	*get_next_line(int fd)
 			return (NULL);
 		if (read_in_file(&(line[fd]), fd, ft_strlen(line[fd]), buffer) == 0)
 			return (NULL);
-		free_malloc(buffer);
+		ft_free_malloc(buffer);
 		buffer = NULL;
 		result = get_first_line(&(line[fd]));
 		if (result == NULL)
