@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:04:40 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/11 20:22:01 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/12 15:58:52 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,6 @@ typedef struct s_data
 	int		line_length;
 	int		endian;
 }			t_data;
-
-t_complex	multiplication_complex(t_complex a, t_complex b)
-{
-	t_complex	result;
-
-	result.real = (a.real * b.real) - (a.imag * b.imag);
-	result.imag = (a.real * b.imag) + (a.imag * b.real);
-	return (result);
-}
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -53,20 +44,35 @@ double	normalization(double min_to, double max_to, double max_from,
 					- min_to) / max_from) * max_from));
 }
 
-int	calculation_complex(t_complex a, int iteration)
+int	ft_abs(int value)
 {
-	t_complex	result;
-	double		normalized;
+	if (value >= 0)
+		return (value);
+	else
+		return (value * -1);
+}
 
-	result = multiplication_complex(a, a);
-	result.real += 0.3;
-	result.imag += 0.5;
+int	calculation_complex(double real, double imag, int iteration)
+{
+	double	result_real;
+	double	result_imag;
+	double	normalized;
+
+	result_real = (real * real) - (imag * imag);
+	result_imag = (real * imag) + (imag * real);
+	real = result_real;
+	imag = result_imag;
+	real += 0.3;
+	imag += 0.5;
 	while (iteration)
 	{
-		result = multiplication_complex(result, result);
-		result.real += 0.3;
-		result.imag += 0.5;
-		if (result.real > 4 || result.imag > 4)
+		result_real = (real * real) - (imag * imag);
+		result_imag = (real * imag) + (imag * real);
+		real = result_real;
+		imag = result_imag;
+		real += 0.3;
+		imag += 0.5;
+		if (ft_abs(real) > 2 || ft_abs(imag) > 2)
 		{
 			normalized = normalization(0, 200, 50, iteration);
 			return (create_trgb(0, 0, 0, normalized));
@@ -80,8 +86,9 @@ int	mouse_hook(int button, int x, int y, t_data *img)
 {
 	double			px;
 	double			py;
-	t_complex		a;
-	static double	min = 0;
+	double			real;
+	double			imag;
+	static double	min = -1.5;
 	static double	max = 1.5;
 
 	(void)x;
@@ -110,9 +117,10 @@ int	mouse_hook(int button, int x, int y, t_data *img)
 		px = 0;
 		while (px < 960)
 		{
-			a.real = normalization(min, max, 960, px);
-			a.imag = normalization(min, max, 640, py);
-			my_mlx_pixel_put(img, (int)px, (int)py, calculation_complex(a, 50));
+			real = normalization(min, max, 960, px);
+			imag = normalization(min, max, 640, py);
+			my_mlx_pixel_put(img, (int)px, (int)py, calculation_complex(real,
+					imag, 100));
 			px++;
 		}
 		py++;
@@ -123,10 +131,11 @@ int	mouse_hook(int button, int x, int y, t_data *img)
 
 int	main(void)
 {
-	t_data		*img;
-	double		x;
-	double		y;
-	t_complex	a;
+	t_data	*img;
+	double	x;
+	double	y;
+	double	real;
+	double	imag;
 
 	img = malloc(sizeof(t_data));
 	img->mlx = mlx_init();
@@ -140,9 +149,9 @@ int	main(void)
 		x = 0;
 		while (x < 960)
 		{
-			a.real = normalization(0, 1.5, 960, x);
-			a.imag = normalization(0, 1.5, 640, y);
-			my_mlx_pixel_put(img, x++, y, calculation_complex(a, 50));
+			real = normalization(-1.5, 1.5, 960, x);
+			imag = normalization(-1.5, 1.5, 640, y);
+			my_mlx_pixel_put(img, x++, y, calculation_complex(real, imag, 100));
 		}
 		y++;
 	}

@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/11 11:34:08 by dgibrat           #+#    #+#              #
-#    Updated: 2025/12/11 19:32:05 by dgibrat          ###   ########.fr        #
+#    Updated: 2025/12/12 15:51:27 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fract-ol
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -O3
 
 SRCPATH = src
 

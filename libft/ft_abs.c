@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 08:55:24 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/11 08:56:48 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/12 15:42:39 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_abs(int value)
 {
-	if (value > 0)
+	if (value >= 0)
 		return (value);
 	else
 		return (value * -1);
