@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:39:38 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 15:16:06 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/12 16:41:28 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_bool	check_argv(int argc, char *argv[])
 	i = 0;
 	while (i < argc)
 	{
+		if (argv[i][0] == '\0')
+			return (FAIL);
 		result = ft_itoa(ft_atoi(argv[i]));
 		if (result == NULL)
 			return (FAIL);

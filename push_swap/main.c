@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 11:24:09 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 15:17:46 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/12 16:44:41 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 	init_struct(&stack, stack_a, stack_b);
 	get_string(&argc, &argv);
 	if (check_argv(argc, argv) || malloc_chunk(&chunk))
-		return (ft_putstr_fd("Error\n", 2), SUCCESS);
+		return (ft_free_array(argv), ft_putstr_fd("Error\n", 2), SUCCESS);
 	if (malloc_init_stack(argc, argv, &stack) || compress_value(&stack))
 		return (free_all(stack, chunk, result, argv), ft_putstr_fd("Error\n",
 				2), SUCCESS);

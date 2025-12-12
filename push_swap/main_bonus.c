@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:31:58 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/10 14:55:50 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/12 16:46:36 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,16 @@ int	main(int argc, char *argv[])
 
 	get_string(&argc, &argv);
 	if (check_argv(argc, argv) || init_circular(&stack_a, &stack_b, argc))
-		return (ft_putstr_fd("Error\n", 2), SUCCESS);
+		return (ft_free_array(argv), ft_putstr_fd("Error\n", 2), SUCCESS);
 	stack.stack_a = &stack_a;
 	stack.stack_b = &stack_b;
 	if (set_stack(&stack, argc, argv))
 		return (free_all(&stack, argv), ft_putstr_fd("Error\n", 2), SUCCESS);
 	read_stdin(&result);
 	operation = ft_split(result, '\n');
-	if (!operation)
+	if (!operation || sort_with_operation(&stack, operation))
 		return (free_all(&stack, argv), free(result), ft_putstr_fd("Error\n",
 				2), FAIL);
-	sort_with_operation(&stack, operation);
 	ft_free_array(operation);
 	if (is_not_sorted(&stack) || stack.stack_b->size > 0)
 		ft_printf("KO\n");
