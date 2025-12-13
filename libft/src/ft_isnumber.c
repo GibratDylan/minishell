@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 16:15:36 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 20:49:47 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/11 09:12:57 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/13 08:35:45 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fract_ol.h"
-#include <stdio.h>
+#include "../include/libft.h"
 
-int	main(int argc, char **argv)
+t_bool	ft_isnumber(const char *str)
 {
-	t_param	param;
+	int	i;
 
-	if (is_valid_param(argc, argv))
-		return (show_valid_param(), SUCCESS);
-	get_param(&param, argv);
-	if (rendering(&param))
-		return (ft_free_all_malloc(), SUCCESS);
-	return (ft_free_all_malloc(), SUCCESS);
+	i = 0;
+	if (!str || !ft_strlen(str))
+		return (0);
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] != '\0')
+	{
+		if (str[i] <= '0' || str[i] >= '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }

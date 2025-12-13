@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 16:15:36 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 20:49:47 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/04 09:27:20 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/13 08:35:01 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fract_ol.h"
-#include <stdio.h>
+#include "../include/libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	t_param	param;
+	unsigned long	i;
 
-	if (is_valid_param(argc, argv))
-		return (show_valid_param(), SUCCESS);
-	get_param(&param, argv);
-	if (rendering(&param))
-		return (ft_free_all_malloc(), SUCCESS);
-	return (ft_free_all_malloc(), SUCCESS);
+	i = 0;
+	if (dest == NULL || src == NULL)
+		return (dest);
+	while (i < n)
+	{
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return (dest);
 }

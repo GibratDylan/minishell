@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 16:15:36 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 20:49:47 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/04 16:39:57 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/13 08:34:27 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fract_ol.h"
-#include <stdio.h>
+#include "../include/libft.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 {
-	t_param	param;
+	unsigned long	i;
 
-	if (is_valid_param(argc, argv))
-		return (show_valid_param(), SUCCESS);
-	get_param(&param, argv);
-	if (rendering(&param))
-		return (ft_free_all_malloc(), SUCCESS);
-	return (ft_free_all_malloc(), SUCCESS);
+	if (dst == NULL || src == NULL)
+		return (0);
+	i = 0;
+	while (src[i] != '\0' && i + 1 < siz)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	if (siz != 0)
+		dst[i] = '\0';
+	return (ft_strlen(src));
 }

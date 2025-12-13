@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 16:15:36 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 20:49:47 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/05 15:36:09 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/13 08:34:21 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fract_ol.h"
-#include <stdio.h>
+#include "../include/libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	t_param	param;
+	size_t	len_s;
+	char	*subs;
 
-	if (is_valid_param(argc, argv))
-		return (show_valid_param(), SUCCESS);
-	get_param(&param, argv);
-	if (rendering(&param))
-		return (ft_free_all_malloc(), SUCCESS);
-	return (ft_free_all_malloc(), SUCCESS);
+	len_s = ft_strlen(s);
+	if (len_s < start)
+		return (ft_strdup(""));
+	if (len > len_s - start)
+		len = len_s - start;
+	subs = ft_malloc(len + 1, sizeof(char));
+	if (subs == NULL)
+		return (NULL);
+	ft_strlcpy(subs, &s[start], len + 1);
+	return (subs);
 }

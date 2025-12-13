@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 16:15:36 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 20:49:47 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/08 12:31:02 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/13 08:34:50 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fract_ol.h"
-#include <stdio.h>
+#include "../include/libft.h"
 
-int	main(int argc, char **argv)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_param	param;
+	long long	ll_n;
+	char		c_nb;
 
-	if (is_valid_param(argc, argv))
-		return (show_valid_param(), SUCCESS);
-	get_param(&param, argv);
-	if (rendering(&param))
-		return (ft_free_all_malloc(), SUCCESS);
-	return (ft_free_all_malloc(), SUCCESS);
+	ll_n = (long long)n;
+	if (ll_n < 0)
+	{
+		write(fd, "-", 1);
+		ll_n *= -1;
+	}
+	if ((ll_n >= 0) && (ll_n <= 9))
+	{
+		c_nb = ll_n + '0';
+		write(fd, &c_nb, 1);
+	}
+	if (ll_n > 9)
+	{
+		ft_putnbr_fd(ll_n / 10, fd);
+		ft_putnbr_fd(ll_n % 10, fd);
+	}
 }

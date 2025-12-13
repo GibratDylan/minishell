@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 16:15:36 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 20:49:47 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/04 17:46:26 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/13 08:34:41 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fract_ol.h"
-#include <stdio.h>
+#include "../include/libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strchr(const char *s, int start, int c)
 {
-	t_param	param;
+	unsigned long	i;
+	char			c_c;
 
-	if (is_valid_param(argc, argv))
-		return (show_valid_param(), SUCCESS);
-	get_param(&param, argv);
-	if (rendering(&param))
-		return (ft_free_all_malloc(), SUCCESS);
-	return (ft_free_all_malloc(), SUCCESS);
+	c_c = (char)c;
+	if (s == NULL)
+		return (NULL);
+	if (c_c == '\0')
+		return ((char *)&s[ft_strlen(s)]);
+	i = 0;
+	if (start >= 0)
+		i = start;
+	while (s[i] != '\0')
+	{
+		if (c_c == s[i])
+			return ((char *)&s[i]);
+		i++;
+	}
+	return (NULL);
 }

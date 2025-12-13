@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 16:15:36 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 20:49:47 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/13 20:24:50 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/13 20:58:00 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fract_ol.h"
-#include <stdio.h>
 
-int	main(int argc, char **argv)
+int	create_trgb(short t, short r, short g, short b)
 {
-	t_param	param;
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
-	if (is_valid_param(argc, argv))
-		return (show_valid_param(), SUCCESS);
-	get_param(&param, argv);
-	if (rendering(&param))
-		return (ft_free_all_malloc(), SUCCESS);
-	return (ft_free_all_malloc(), SUCCESS);
+void	set_coordinate(t_data *img)
+{
+	img->min_x = MIN_X;
+	img->max_x = MAX_X;
+	img->min_y = MIN_Y;
+	img->max_y = MAX_X;
 }

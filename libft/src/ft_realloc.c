@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 16:15:36 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 20:49:47 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/11 10:13:30 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/13 08:34:46 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fract_ol.h"
-#include <stdio.h>
+#include "../include/libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_realloc(void *ptr, size_t size_before, size_t size_after)
 {
-	t_param	param;
+	void	*result;
 
-	if (is_valid_param(argc, argv))
-		return (show_valid_param(), SUCCESS);
-	get_param(&param, argv);
-	if (rendering(&param))
-		return (ft_free_all_malloc(), SUCCESS);
-	return (ft_free_all_malloc(), SUCCESS);
+	result = NULL;
+	if (size_after > 0)
+	{
+		result = ft_malloc(1, size_after);
+		if (size_before < size_after)
+			ft_memcpy(result, ptr, size_before);
+		else
+			ft_memcpy(result, ptr, size_after);
+	}
+	ft_free_malloc(ptr);
+	return (result);
 }

@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/13 16:15:36 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 20:49:47 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/11/04 18:36:52 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/13 08:35:03 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fract_ol.h"
-#include <stdio.h>
+#include "../include/libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	t_param	param;
+	unsigned long	i;
+	unsigned char	*uc_s;
+	unsigned char	uc_c;
 
-	if (is_valid_param(argc, argv))
-		return (show_valid_param(), SUCCESS);
-	get_param(&param, argv);
-	if (rendering(&param))
-		return (ft_free_all_malloc(), SUCCESS);
-	return (ft_free_all_malloc(), SUCCESS);
+	i = 0;
+	uc_c = (unsigned char)c;
+	uc_s = (unsigned char *)s;
+	while (i < n)
+	{
+		if (uc_c == uc_s[i])
+			return ((void *)&uc_s[i]);
+		i++;
+	}
+	return (NULL);
 }
