@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isnumber.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/11 09:12:57 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 19:58:14 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/13 16:15:36 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/15 13:53:38 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../include/fractol.h"
 
-t_bool	ft_isnumber(const char *str)
+int	main(int argc, char **argv)
 {
-	int		i;
-	t_bool	exposent;
+	t_param	param;
+	t_data	img;
 
-	i = 0;
-	exposent = 0;
-	if (!str || !ft_strlen(str))
-		return (0);
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] != '\0')
-	{
-		if ((str[i] == '.' && exposent) || ((str[i] <= '0' || str[i] >= '9')
-				&& exposent))
-			return (0);
-		if (str[i] == '.')
-			exposent = 1;
-		i++;
-	}
-	return (1);
+	if (is_valid_param(argc, argv))
+		return (show_valid_param(), SUCCESS);
+	get_param(&param, argv);
+	if (rendering(&img, &param))
+		return (close_and_free(&img), SUCCESS);
+	return (close_and_free(&img), SUCCESS);
 }
