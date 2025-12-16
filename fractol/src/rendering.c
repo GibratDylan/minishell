@@ -6,13 +6,13 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 20:11:07 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/15 16:53:05 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/16 10:31:23 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-void	my_mlx_pixel_put(t_data *img, short x, short y, short color)
+static void	my_mlx_pixel_put(t_data *img, short x, short y, short color)
 {
 	char	*dst1;
 
@@ -20,7 +20,7 @@ void	my_mlx_pixel_put(t_data *img, short x, short y, short color)
 	*(unsigned int *)dst1 = color;
 }
 
-void	put_all_pixel(t_data *img, double range_real, double range_imag)
+static void	put_all_pixel(t_data *img, double range_real, double range_imag)
 {
 	short	screen_y;
 	short	screen_x;

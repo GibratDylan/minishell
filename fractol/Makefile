@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/11 11:34:08 by dgibrat           #+#    #+#              #
-#    Updated: 2025/12/15 16:13:38 by dgibrat          ###   ########.fr        #
+#    Updated: 2025/12/16 12:10:55 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ HEADERS = include/fractol.h
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -O3 -march=native -ffast-math
+FLAGS = -Wall -Wextra -Werror -Ofast -march=native -mtune=native -ffast-math -funroll-loops
 
 SRCPATH = src
 
@@ -41,7 +41,7 @@ LIBFT = $(addprefix $(LIBFTPATH)/, libft.a)
 all: $(LIBX) $(LIBFT) $(NAME)
 
 $(NAME): $(LIBX) $(LIBFTPATH) $(OBJ) $(HEADERS)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -L$(LIBFTPATH) -I$(LIBFTPATH)/include -lft -L$(LIBXPATH) -lmlx -L/usr/lib -lXext -lX11
+	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -L$(LIBFTPATH) -I$(LIBFTPATH)/include -lft -L$(LIBXPATH) -lmlx -L/usr/lib -lXext -lX11 -lm
 
 $(LIBX):
 	$(MAKE) -C $(LIBXPATH)

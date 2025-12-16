@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:05:23 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/15 16:50:17 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/16 13:12:55 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int			mouse_hook(int button, int x, int y, t_data *img);
 int			key_hook(int button, t_data *img);
 double		normalization(double min_to, double max_to, double max_from,
 				short value);
-void		my_mlx_pixel_put(t_data *data, short x, short y, short color);
 void		color_white(int *palette);
 void		color_blue(int *palette);
 void		color_psyc(int *palette);

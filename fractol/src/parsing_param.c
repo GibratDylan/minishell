@@ -6,11 +6,31 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 16:22:50 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/15 14:44:05 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/16 13:04:11 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
+
+static t_bool	is_valid_color(int argc, char **argv)
+{
+	if ((argc != 0 && ft_strncmp(argv[2], "White", ft_strlen(argv[2]))
+			&& ft_strncmp(argv[2], "Blue", ft_strlen(argv[2]))
+			&& ft_strncmp(argv[2], "Psyc", ft_strlen(argv[2])))
+		&& (!ft_strncmp(argv[1], "Mandelbrot", ft_strlen(argv[1]))))
+		return (FAIL);
+	if ((argc != 0 && ft_strncmp(argv[2], "White", ft_strlen(argv[2]))
+			&& ft_strncmp(argv[2], "Blue", ft_strlen(argv[2]))
+			&& ft_strncmp(argv[2], "Psyc", ft_strlen(argv[2])))
+		&& !ft_strncmp(argv[1], "Burning", ft_strlen(argv[1])))
+		return (FAIL);
+	if ((argc != 0 && ft_strncmp(argv[4], "White", ft_strlen(argv[4]))
+			&& ft_strncmp(argv[4], "Blue", ft_strlen(argv[4]))
+			&& ft_strncmp(argv[4], "Psyc", ft_strlen(argv[4])))
+		&& !ft_strncmp(argv[1], "Julia", ft_strlen(argv[1])))
+		return (FAIL);
+	return (SUCCESS);
+}
 
 t_bool	is_valid_param(int argc, char **argv)
 {
@@ -27,20 +47,7 @@ t_bool	is_valid_param(int argc, char **argv)
 			|| !ft_isnumber(argv[3]))
 			return (FAIL);
 	}
-	if ((argc != 0 && ft_strncmp(argv[2], "White", ft_strlen(argv[2]))
-			&& ft_strncmp(argv[2], "Blue", ft_strlen(argv[2]))
-			&& ft_strncmp(argv[2], "Psyc", ft_strlen(argv[2])))
-		&& !ft_strncmp(argv[1], "Mandelbrot", ft_strlen(argv[1])))
-		return (FAIL);
-	if ((argc != 0 && ft_strncmp(argv[2], "White", ft_strlen(argv[2]))
-			&& ft_strncmp(argv[2], "Blue", ft_strlen(argv[2]))
-			&& ft_strncmp(argv[2], "Psyc", ft_strlen(argv[2])))
-		&& !ft_strncmp(argv[1], "Burning", ft_strlen(argv[1])))
-		return (FAIL);
-	if ((argc != 0 && ft_strncmp(argv[4], "White", ft_strlen(argv[4]))
-			&& ft_strncmp(argv[4], "Blue", ft_strlen(argv[4]))
-			&& ft_strncmp(argv[4], "Psyc", ft_strlen(argv[4])))
-		&& !ft_strncmp(argv[1], "Julia", ft_strlen(argv[1])))
+	if (is_valid_color(argc, argv))
 		return (FAIL);
 	if (argc > 1)
 		return (FAIL);
@@ -65,23 +72,14 @@ static void	get_color(t_param *param, char **argv)
 	else if (param->set == SET_JULIA && !ft_strncmp(argv[4], "Psyc",
 			ft_strlen(argv[4])))
 		param->color = COLOR_PSYC;
-	else if (param->set == SET_MANDEL && !ft_strncmp(argv[2], "White",
-			ft_strlen(argv[2])))
+	else if ((param->set == SET_MANDEL || param->set == SET_SHIP)
+		&& !ft_strncmp(argv[2], "White", ft_strlen(argv[2])))
 		param->color = COLOR_WHITE;
-	else if (param->set == SET_MANDEL && !ft_strncmp(argv[2], "Blue",
-			ft_strlen(argv[2])))
+	else if ((param->set == SET_MANDEL || param->set == SET_SHIP)
+		&& !ft_strncmp(argv[2], "Blue", ft_strlen(argv[2])))
 		param->color = COLOR_BLUE;
-	else if (param->set == SET_MANDEL && !ft_strncmp(argv[2], "Psyc",
-			ft_strlen(argv[2])))
-		param->color = COLOR_PSYC;
-	else if (param->set == SET_SHIP && !ft_strncmp(argv[2], "White",
-			ft_strlen(argv[2])))
-		param->color = COLOR_WHITE;
-	else if (param->set == SET_SHIP && !ft_strncmp(argv[2], "Blue",
-			ft_strlen(argv[2])))
-		param->color = COLOR_BLUE;
-	else if (param->set == SET_SHIP && !ft_strncmp(argv[2], "Psyc",
-			ft_strlen(argv[2])))
+	else if ((param->set == SET_MANDEL || param->set == SET_SHIP)
+		&& !ft_strncmp(argv[2], "Psyc", ft_strlen(argv[2])))
 		param->color = COLOR_PSYC;
 }
 

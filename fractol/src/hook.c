@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 20:17:20 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/15 16:50:38 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/16 09:35:52 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	mouse_hook(int button, int x, int y, t_data *img)
 {
-	double		mx;
-	double		my;
-	double		zoom_factor;
-	static int	number_of_zoom = 0;
+	double			mx;
+	double			my;
+	double			zoom_factor;
+	static short	number_of_zoom = 0;
 
 	if (button != 4 && button != 5)
 		return (0);
