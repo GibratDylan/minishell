@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/11 11:34:08 by dgibrat           #+#    #+#              #
-#    Updated: 2025/12/17 11:34:47 by dgibrat          ###   ########.fr        #
+#    Updated: 2025/12/17 12:45:54 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ HEADERS = include/fractol.h
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -Ofast -march=native -mtune=native -ffast-math -funroll-loops
+FLAGS = -Wall -Wextra -Werror -Ofast -march=native -mtune=native -funroll-loops
 
 SRCPATH = src
 
