@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:21:39 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/15 12:17:21 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/17 12:35:40 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,19 @@ void	color_psyc(int *palette)
 		palette[i] = (0x00FFFFFF * i) / ITERATION;
 		i++;
 	}
+}
+
+int	shift_color(t_data *img)
+{
+	int	i;
+
+	i = 0;
+	while (i <= ITERATION)
+	{
+		img->palette[i % ITERATION] = img->palette[(i + 1) % ITERATION];
+		i++;
+	}
+	launch_rendering(img);
+	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
+	return (0);
 }

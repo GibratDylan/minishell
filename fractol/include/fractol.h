@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:05:23 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/16 13:12:55 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/17 12:38:56 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define ITERATION 100
 # define MIN_X -1.5
 # define MAX_X 1.5
-# define MIN_Y -0.84
-# define MAX_Y 0.84
+# define MIN_Y -0.65
+# define MAX_Y 0.65
 # define SET_JULIA 0
 # define SET_MANDEL 1
 # define SET_SHIP 2
@@ -41,6 +41,7 @@ typedef struct s_param
 	double	real;
 	double	imag;
 	short	color;
+	t_bool	shift;
 }			t_param;
 
 typedef struct s_coord
@@ -66,7 +67,7 @@ typedef struct s_data
 }			t_data;
 
 void		show_valid_param(void);
-t_bool		is_valid_param(int argc, char **argv);
+t_bool		is_valid_param(int argc, char **argv, t_param *param);
 void		get_param(t_param *param, char **argv);
 t_bool		rendering(t_data *img, t_param *param);
 int			create_trgb(short t, short r, short g, short b);
@@ -81,6 +82,7 @@ double		normalization(double min_to, double max_to, double max_from,
 void		color_white(int *palette);
 void		color_blue(int *palette);
 void		color_psyc(int *palette);
+int			shift_color(t_data *img);
 void		go_up(t_data *img);
 void		go_down(t_data *img);
 void		go_left(t_data *img);

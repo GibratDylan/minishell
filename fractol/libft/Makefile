@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/03 16:57:37 by dgibrat           #+#    #+#              #
-#    Updated: 2025/12/13 18:17:26 by dgibrat          ###   ########.fr        #
+#    Updated: 2025/12/17 11:34:58 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,16 +35,20 @@ OBJFILE = $(SRCFILE:.c=.o)
 
 OBJ = $(addprefix $(OBJPATH)/, $(OBJFILE))
 
-all: $(NAME)
+all: $(OBJPATH) $(NAME)
 
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
+
+$(OBJPATH):
+	mkdir $(OBJPATH)
 
 $(OBJPATH)/%.o : $(SRCPATH)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
+	rm -rf $(OBJPATH)
 
 fclean: clean
 	rm -f $(NAME)

@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 20:11:07 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/16 10:31:23 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/17 12:36:43 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ t_bool	rendering(t_data *img, t_param *param)
 			&img->line_length, &img->endian);
 	img->param = param;
 	img->coord = set_coordinate(&coord);
+	if (img->param->shift)
+		mlx_loop_hook(img->mlx, shift_color, img);
 	mlx_mouse_hook(img->win, mouse_hook, img);
 	mlx_key_hook(img->win, key_hook, img);
 	mlx_hook(img->win, 17, 17, cross_exit, img);

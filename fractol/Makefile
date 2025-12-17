@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/11 11:34:08 by dgibrat           #+#    #+#              #
-#    Updated: 2025/12/16 12:10:55 by dgibrat          ###   ########.fr        #
+#    Updated: 2025/12/17 11:34:47 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,10 @@ LIBFTPATH = libft
 
 LIBFT = $(addprefix $(LIBFTPATH)/, libft.a)
 
-all: $(LIBX) $(LIBFT) $(NAME)
+all: $(OBJPATH) $(LIBX) $(LIBFT) $(NAME)
 
 $(NAME): $(LIBX) $(LIBFTPATH) $(OBJ) $(HEADERS)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -L$(LIBFTPATH) -I$(LIBFTPATH)/include -lft -L$(LIBXPATH) -lmlx -L/usr/lib -lXext -lX11 -lm
+	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -L$(LIBFTPATH) -I$(LIBFTPATH)/include -lft -L$(LIBXPATH) -lmlx -L/usr/lib -lXext -lX11
 
 $(LIBX):
 	$(MAKE) -C $(LIBXPATH)
@@ -49,11 +49,15 @@ $(LIBX):
 $(LIBFT):
 	$(MAKE) -C $(LIBFTPATH)
 
+$(OBJPATH):
+	mkdir $(OBJPATH)
+
 $(OBJPATH)/%.o : $(SRCPATH)/%.c $(HEADERS)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
+	rm -rf $(OBJPATH)
 	$(MAKE) -C $(LIBXPATH) clean
 	$(MAKE) -C $(LIBFTPATH) clean
 
