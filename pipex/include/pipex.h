@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 15:18:09 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/18 18:31:05 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/19 16:18:06 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ t_bool				cmd_handler(t_cmd **cmd, int *fd_pipe, int *fd_pipe_next);
 void				close_pipe(int *fd_pipe, int *fd_pipe_next);
 t_bool				outfile_handler(char **files, t_cmd **cmd, int *fd_pipe);
 t_bool				execve_with_dup2(t_cmd *cmd, int from, int to);
+t_bool				update_pipe(int *fd_pipe, int *fd_pipe_next);
 
 #endif

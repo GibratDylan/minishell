@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:10:15 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/19 13:11:56 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/19 16:18:16 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_bool	infile_handler(char **files, t_cmd **cmd, int *fd_pipe)
 {
 	pid_t	pid;
 	int		fd;
-	int		status;
 
 	if (!(*cmd) || !cmd)
 		return (FAIL);
@@ -34,9 +33,7 @@ t_bool	infile_handler(char **files, t_cmd **cmd, int *fd_pipe)
 			return (close_pipe(fd_pipe, NULL), close(fd),
 				execve_error_handler((*cmd)->argv[0]), FAIL);
 	}
-	waitpid(pid, &status, 0);
-	if (status)
-		return (close_pipe(fd_pipe, NULL), FAIL);
+	waitpid(pid, NULL, 0);
 	*cmd = (*cmd)->next;
 	return (SUCCESS);
 }
@@ -45,7 +42,6 @@ t_bool	outfile_handler(char **files, t_cmd **cmd, int *fd_pipe)
 {
 	pid_t	pid;
 	int		fd;
-	int		status;
 
 	if (!(*cmd) || !cmd)
 		return (close_pipe(fd_pipe, NULL), FAIL);
@@ -60,19 +56,16 @@ t_bool	outfile_handler(char **files, t_cmd **cmd, int *fd_pipe)
 		if (fd == -1)
 			return (close_pipe(fd_pipe, NULL), ft_free_all_malloc(), FAIL);
 		if (execve_with_dup2(*cmd, fd_pipe[0], fd))
-			return (close_pipe(fd_pipe, NULL),
+			return (close_pipe(fd_pipe, NULL), close(fd),
 				execve_error_handler((*cmd)->argv[0]), FAIL);
 	}
-	waitpid(pid, &status, 0);
-	if (status)
-		return (close_pipe(fd_pipe, NULL), FAIL);
+	waitpid(pid, NULL, 0);
 	return (SUCCESS);
 }
 
 t_bool	cmd_handler(t_cmd **cmd, int *fd_pipe, int *fd_pipe_next)
 {
 	pid_t	pid;
-	int		status;
 
 	if (!(*cmd) || !cmd)
 		return (close_pipe(fd_pipe, NULL), FAIL);
@@ -91,11 +84,8 @@ t_bool	cmd_handler(t_cmd **cmd, int *fd_pipe, int *fd_pipe_next)
 				return (close_pipe(fd_pipe, fd_pipe_next),
 					execve_error_handler((*cmd)->argv[0]), FAIL);
 		}
-		waitpid(pid, &status, 0);
-		if (status || close(fd_pipe[0]) == -1 || fd_pipe[1] == -1)
-			return (close_pipe(fd_pipe, NULL), FAIL);
-		fd_pipe[0] = fd_pipe_next[0];
-		fd_pipe[1] = fd_pipe_next[1];
+		waitpid(pid, NULL, 0);
+		update_pipe(fd_pipe, fd_pipe_next);
 		*cmd = (*cmd)->next;
 	}
 	return (SUCCESS);
