@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:11:42 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/18 18:34:54 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/19 13:08:41 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ t_bool	execve_with_dup2(t_cmd *cmd, int from, int to)
 		return (FAIL);
 	if (execve(cmd->path, cmd->argv, cmd->argv) == -1)
 		return (FAIL);
+	close(from);
+	close(to);
 	return (SUCCESS);
 }

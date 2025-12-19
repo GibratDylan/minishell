@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:10:15 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/18 18:54:29 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/19 13:11:56 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_bool	outfile_handler(char **files, t_cmd **cmd, int *fd_pipe)
 		if (fd == -1)
 			return (close_pipe(fd_pipe, NULL), ft_free_all_malloc(), FAIL);
 		if (execve_with_dup2(*cmd, fd_pipe[0], fd))
-			return (close_pipe(fd_pipe, NULL), close(fd),
+			return (close_pipe(fd_pipe, NULL),
 				execve_error_handler((*cmd)->argv[0]), FAIL);
 	}
 	waitpid(pid, &status, 0);
