@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   normalization.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 10:43:18 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/20 14:19:45 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/20 17:09:56 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/20 17:10:14 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+double	normalization(double min_to, double max_to, double max_from,
+		short value)
 {
-	unsigned long	i;
-	size_t			len_little;
+	double	max_minus_min;
+	double	max_minus_min_div_max_from;
 
-	len_little = ft_strlen(little);
-	if (len_little == 0)
-		return ((char *)big);
-	if (big == NULL || len == 0 || len < len_little)
-		return (NULL);
-	i = 0;
-	while (big[i] && i < len - len_little + 1)
-	{
-		if (ft_strncmp(little, &big[i], len_little) == 0)
-			return ((char *)&big[i]);
-		i++;
-	}
-	return (NULL);
+	max_minus_min = max_to - min_to;
+	max_minus_min_div_max_from = max_minus_min / max_from;
+	return (max_minus_min_div_max_from * value + (max_to
+			- max_minus_min_div_max_from * max_from));
 }

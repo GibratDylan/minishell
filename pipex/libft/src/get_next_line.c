@@ -6,13 +6,13 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 17:23:04 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/17 16:28:01 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/20 15:06:28 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-static int	read_in_file(char **line, int fd, size_t total, char *buffer)
+static t_bool	read_in_file(char **line, int fd, size_t total, char *buffer)
 {
 	ssize_t	size_read;
 	char	*tmp;
@@ -22,16 +22,16 @@ static int	read_in_file(char **line, int fd, size_t total, char *buffer)
 	{
 		size_read = read(fd, buffer, BUFFER_SIZE);
 		if (size_read < 0)
-			return (0);
+			return (FAIL);
 		buffer[size_read] = '\0';
 		tmp = ft_strjoin(*line, buffer, total);
 		if (tmp == NULL)
-			return (0);
+			return (FAIL);
 		ft_free_malloc(*line);
 		*line = tmp;
 		total += size_read;
 	}
-	return (1);
+	return (SUCCESS);
 }
 
 static char	*get_first_line(char **line)
@@ -69,7 +69,7 @@ char	*get_next_line(int fd, int free_line_fd)
 		buffer = ft_malloc(BUFFER_SIZE + 1, sizeof(char));
 		if (buffer == NULL)
 			return (NULL);
-		if (read_in_file(&(line[fd]), fd, ft_strlen(line[fd]), buffer) == 0)
+		if (read_in_file(&(line[fd]), fd, ft_strlen(line[fd]), buffer))
 			return (NULL);
 		ft_free_malloc(buffer);
 		buffer = NULL;

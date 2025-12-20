@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 15:17:57 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/19 15:47:31 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/20 16:50:44 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,21 @@ int	main(int argc, char **argv)
 	char	*files[2];
 	int		fd_pipe[2];
 	int		fd_pipe_next[2];
+	char	*limiter;
 
 	cmd = NULL;
-	if (parsing_param(&cmd, argc, argv))
+	limiter = NULL;
+	if (parsing_param(&cmd, argc, argv, &limiter))
 		return (ft_free_all_malloc(), FAIL);
-	if (check_files(argv, argc, files))
+	if (check_files(argv, argc, files, limiter))
 		return (ft_free_all_malloc(), FAIL);
-	if (infile_handler(files, &cmd, fd_pipe))
+	if (!limiter && infile_handler(files, &cmd, fd_pipe))
 		return (ft_free_all_malloc(), FAIL);
-	if (cmd_handler(&cmd, fd_pipe, fd_pipe_next))
+	if (limiter && limiter_handler(&cmd, fd_pipe, limiter))
 		return (ft_free_all_malloc(), FAIL);
-	if (outfile_handler(files, &cmd, fd_pipe))
+	if (cmd && cmd->next && cmd_handler(&cmd, fd_pipe, fd_pipe_next))
+		return (ft_free_all_malloc(), FAIL);
+	if (cmd && outfile_handler(files, &cmd, fd_pipe, limiter))
 		return (ft_free_all_malloc(), FAIL);
 	return (close_pipe(fd_pipe, NULL), ft_free_all_malloc(), SUCCESS);
 }

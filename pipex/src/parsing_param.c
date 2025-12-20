@@ -6,13 +6,26 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 14:58:05 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/18 18:02:13 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/20 15:13:07 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-t_bool	parsing_param(t_cmd **cmd, int argc, char **argv)
+static t_bool	is_here_doc(int *i, int argc, char **argv, char **limiter)
+{
+	if (!ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])))
+	{
+		if (2 > argc - 1)
+			return (FAIL);
+		else
+			*limiter = ft_strdup(argv[2]);
+		(*i)++;
+	}
+	return (SUCCESS);
+}
+
+t_bool	parsing_param(t_cmd **cmd, int argc, char **argv, char **limiter)
 {
 	int		i;
 	t_cmd	*new_node;
@@ -21,6 +34,8 @@ t_bool	parsing_param(t_cmd **cmd, int argc, char **argv)
 	char	*tmp;
 
 	i = 2;
+	if (is_here_doc(&i, argc, argv, limiter))
+		return (FAIL);
 	while (i < argc - 1)
 	{
 		new_argv = ft_split(argv[i], ' ');
