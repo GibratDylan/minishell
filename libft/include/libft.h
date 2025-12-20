@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 17:48:36 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/16 15:20:01 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/20 17:10:47 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,12 @@ char					*ft_strdup(const char *s);
 void					*ft_calloc(size_t nmemb, size_t size);
 char					*ft_substr(char const *s, unsigned int start,
 							size_t len);
+char					*ft_strjoin_free(char *s1, char const *s2,
+							unsigned int len);
 char					*ft_strjoin(char const *s1, char const *s2,
 							unsigned int len);
 char					*ft_strtrim(char const *s1, char const *set);
+char					*ft_strtrim_free(char *s1, char const *set);
 char					**ft_split(char const *s, char c);
 char					*ft_itoa(int n);
 char					*ft_strmapi(char const *s, char (*f)(unsigned int,
@@ -114,5 +117,7 @@ int						prev_circular(t_stack *stack, int nbr, int cap);
 int						next_circular(t_stack *stack, int nbr, int cap);
 t_bool					init_circular(t_stack *stack, int size);
 t_bool					issorted_sorted(t_stack *stack);
+double					normalization(double min_to, double max_to,
+							double max_from, short value);
 
 #endif

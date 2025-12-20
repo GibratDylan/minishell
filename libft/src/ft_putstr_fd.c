@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 12:25:16 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 08:34:49 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/18 13:44:28 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	unsigned long	i;
-
-	i = 0;
 	if (s == NULL)
 		return ;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	write(fd, s, ft_strlen(s));
 }

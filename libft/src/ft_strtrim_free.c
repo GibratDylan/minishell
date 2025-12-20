@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/04 18:26:48 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 08:34:25 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/20 16:12:35 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/20 17:04:39 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	*ft_strtrim_free(char *s1, char const *set)
 {
 	unsigned long	i;
+	unsigned long	start;
 	size_t			len_s1;
-	size_t			len_s2;
+	char			*result;
 
-	if (s1 == NULL || s2 == NULL)
-		return (0);
+	if (s1 == NULL || set == NULL)
+		return (NULL);
 	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	if ((len_s1 == 0 && len_s2 == 0) || n == 0)
-		return (0);
 	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0' && i < n)
+	while (i < len_s1 && ft_strchr(set, 0, s1[i]))
 		i++;
-	if (i == n)
-		return (0);
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	start = i;
+	i = 0;
+	while (i < len_s1 && ft_strchr(set, 0, s1[len_s1 - i - 1]))
+		i++;
+	result = ft_substr(s1, start, len_s1 - i - start);
+	ft_free_malloc(s1);
+	return (result);
 }

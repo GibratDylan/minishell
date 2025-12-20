@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 09:12:57 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/16 15:25:33 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/19 11:12:39 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	ft_isnumber(const char *str)
 	while (str[i] != '\0')
 	{
 		if ((str[i] == '.' && exposent) || ((str[i] < '0' || str[i] > '9')
-				&& exposent))
+				&& str[i] != '.'))
 			return (0);
 		if (str[i] == '.')
 			exposent = 1;
