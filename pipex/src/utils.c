@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:11:42 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/20 16:10:09 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/22 16:27:12 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ t_bool	execve_with_dup2(t_cmd *cmd, int from, int to)
 {
 	if (dup2(from, 0) == -1)
 		return (FAIL);
+	close(from);
 	if (dup2(to, 1) == -1)
 		return (FAIL);
-	close(from);
 	close(to);
-	if (execve(cmd->path, cmd->argv, cmd->argv) == -1)
-		return (FAIL);
+	if (execve(cmd->path, cmd->argv, cmd->envp) == -1)
+		return (errno);
 	return (SUCCESS);
 }
 
@@ -48,4 +48,26 @@ t_bool	update_pipe(int *fd_pipe, int *fd_pipe_next)
 	fd_pipe[0] = fd_pipe_next[0];
 	fd_pipe[1] = fd_pipe_next[1];
 	return (SUCCESS);
+}
+
+void	status_gestion(int errnum)
+{
+	if (errnum == 0)
+		return ;
+	ft_free_all_malloc();
+	if (errnum == 2304)
+		exit(127);
+	exit(FAIL);
+}
+
+void	add_envp_in_cmd(t_cmd *cmd, char **envp)
+{
+	t_cmd	*head;
+
+	head = cmd;
+	while (head)
+	{
+		head->envp = envp;
+		head = head->next;
+	}
 }

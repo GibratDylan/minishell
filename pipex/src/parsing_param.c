@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 14:58:05 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/20 15:13:07 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/22 14:32:36 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_bool	parsing_param(t_cmd **cmd, int argc, char **argv, char **limiter)
 	while (i < argc - 1)
 	{
 		new_argv = ft_split(argv[i], ' ');
-		new_path = ft_strjoin("/usr/bin/", new_argv[0], 9);
+		new_path = ft_strjoin("/bin/", new_argv[0], 5);
 		tmp = new_argv[0];
 		new_argv[0] = ft_strjoin("./", tmp, 2);
 		ft_free_malloc(tmp);

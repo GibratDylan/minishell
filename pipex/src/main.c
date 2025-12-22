@@ -6,13 +6,13 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 15:17:57 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/20 16:50:44 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/22 14:32:48 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	*cmd;
 	char	*files[2];
@@ -23,7 +23,8 @@ int	main(int argc, char **argv)
 	cmd = NULL;
 	limiter = NULL;
 	if (parsing_param(&cmd, argc, argv, &limiter))
-		return (ft_free_all_malloc(), FAIL);
+		return (ft_free_all_malloc(), SUCCESS);
+	add_envp_in_cmd(cmd, envp);
 	if (check_files(argv, argc, files, limiter))
 		return (ft_free_all_malloc(), FAIL);
 	if (!limiter && infile_handler(files, &cmd, fd_pipe))
