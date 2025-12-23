@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 15:17:57 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/23 14:13:17 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/23 16:57:34 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	main(int argc, char **argv, char **envp)
 
 	cmd = NULL;
 	limiter = NULL;
+	if (argc < 5)
+		return (SUCCESS);
 	if (parsing_param(&cmd, argc, argv, &limiter))
 		return (ft_free_all_malloc(), SUCCESS);
 	add_envp_in_cmd(cmd, envp);

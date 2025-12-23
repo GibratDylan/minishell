@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 14:59:05 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/22 15:04:15 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/23 15:53:29 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@ t_bool	check_files(char **argv, int argc, char **files, char *limiter)
 	if (!limiter)
 	{
 		if (access(argv[1], F_OK) == -1)
-			ft_printf("zsh: no such file or directory: %s\n", argv[1]);
-		if (access(argv[1], R_OK) == -1)
-			ft_printf("zsh: permission denied: %s\n", argv[1]);
+		{
+			ft_putstr_fd("zsh: no such file or directory: ", 2);
+			ft_putendl_fd(argv[1], 2);
+		}
+		else if (access(argv[1], R_OK) == -1)
+		{
+			ft_putstr_fd("zsh: permission denied: ", 2);
+			ft_putendl_fd(argv[1], 2);
+		}
 		files[0] = ft_strdup(argv[1]);
 	}
 	if (!access(argv[argc - 1], F_OK) && access(argv[argc - 1], W_OK) == -1)
