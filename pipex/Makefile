@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/16 15:14:22 by dgibrat           #+#    #+#              #
-#    Updated: 2025/12/18 17:15:09 by dgibrat          ###   ########.fr        #
+#    Updated: 2025/12/23 13:23:40 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ FLAGS = -Wall -Wextra -Werror
 
 SRCPATH = src
 
-SRCFILE = main.c lst_cmd.c cmd_handler.c utils.c error.c parsing_param.c
+SRCFILE = main.c lst_cmd.c cmd_handler.c utils.c error.c parsing_param.c wait_handler.c
 
 SRC = $(addprefix $(SRCPATH)/, $(SRCFILE))
 

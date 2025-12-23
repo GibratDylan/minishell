@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 15:18:09 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/22 15:04:12 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/23 15:13:17 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,8 @@ t_bool				update_pipe(int *fd_pipe, int *fd_pipe_next);
 void				status_gestion(int errnum);
 void				add_envp_in_cmd(t_cmd *cmd, char **envp);
 void				exitfre(t_cmd **cmd);
+t_bool				wait_first_pid(int *status);
+t_bool				add_pid_to_wait(pid_t pid);
+t_bool				wait_all_pid(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:10:15 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/22 17:18:00 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/23 15:34:16 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_bool	infile_handler(char **files, t_cmd **cmd, int *fd_pipe)
 {
 	pid_t	pid;
 	int		fd;
-	int		status;
 
 	if (!(*cmd) || !cmd)
 		return (FAIL);
@@ -32,11 +31,9 @@ t_bool	infile_handler(char **files, t_cmd **cmd, int *fd_pipe)
 			return (ft_free_all_malloc(), ft_free_all_malloc(), exit(0),
 				SUCCESS);
 		if (execve_with_dup2(*cmd, fd, fd_pipe[1]))
-			return (close_pipe(fd_pipe, NULL), close(fd),
-				execve_error_handler(&(*cmd)->argv[0][2]), SUCCESS);
+			return (close_pipe(fd_pipe, NULL), close(fd), exitfre(cmd), FAIL);
 	}
-	ft_putnbr_fd(pid, 2);
-	ft_putnbr_fd(wait(&status), 2);
+	add_pid_to_wait(pid);
 	return (SUCCESS);
 }
 
@@ -44,7 +41,6 @@ t_bool	outfile_handler(char **files, t_cmd **cmd, int *fd_pipe, char *limiter)
 {
 	pid_t	pid;
 	int		fd;
-	int		status;
 
 	if (!cmd)
 		return (close_pipe(fd_pipe, NULL), FAIL);
@@ -64,15 +60,15 @@ t_bool	outfile_handler(char **files, t_cmd **cmd, int *fd_pipe, char *limiter)
 		if (execve_with_dup2(*cmd, fd_pipe[0], fd))
 			return (close_pipe(fd_pipe, NULL), close(fd), exitfre(cmd), FAIL);
 	}
-	waitpid(pid, &status, 0);
-	status_gestion(status);
+	(add_pid_to_wait(pid), close_pipe(fd_pipe, NULL));
+	if (wait_all_pid())
+		return (FAIL);
 	return (SUCCESS);
 }
 
 t_bool	cmd_handler(t_cmd **cmd, int *fd_pipe, int *fd_pipe_next)
 {
 	pid_t	pid;
-	int		status;
 
 	if (!cmd)
 		return (close_pipe(fd_pipe, NULL), FAIL);
@@ -91,8 +87,7 @@ t_bool	cmd_handler(t_cmd **cmd, int *fd_pipe, int *fd_pipe_next)
 			if (execve_with_dup2(*cmd, fd_pipe[0], fd_pipe_next[1]))
 				return (close_pipe(fd_pipe, fd_pipe_next), exitfre(cmd), FAIL);
 		}
-		waitpid(pid, &status, 0);
-		status_gestion(status);
+		add_pid_to_wait(pid);
 		(update_pipe(fd_pipe, fd_pipe_next), *cmd = (*cmd)->next);
 	}
 	return (SUCCESS);
@@ -130,7 +125,6 @@ t_bool	limiter_handler(t_cmd **cmd, int *fd_pipe, char *limiter)
 {
 	pid_t	pid;
 	int		fd_pipe_next[2];
-	int		status;
 
 	if (!(*cmd) || !cmd)
 		return (FAIL);
@@ -146,11 +140,8 @@ t_bool	limiter_handler(t_cmd **cmd, int *fd_pipe, char *limiter)
 		if (read_in_here_doc(fd_pipe_next, limiter))
 			return (close_pipe(fd_pipe, fd_pipe_next), FAIL);
 		if (execve_with_dup2(*cmd, fd_pipe_next[0], fd_pipe[1]))
-			return (close_pipe(fd_pipe, fd_pipe_next),
-				execve_error_handler(&(*cmd)->argv[0][2]), ft_free_all_malloc(),
-				exit(errno), FAIL);
+			return (close_pipe(fd_pipe, fd_pipe_next), exitfre(cmd), FAIL);
 	}
-	waitpid(pid, &status, 0);
-	status_gestion(status);
+	add_pid_to_wait(pid);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:11:42 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/22 16:27:12 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/23 15:36:41 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,18 @@ t_bool	update_pipe(int *fd_pipe, int *fd_pipe_next)
 
 void	status_gestion(int errnum)
 {
-	if (errnum == 0)
-		return ;
-	ft_free_all_malloc();
+	ft_printf("%i\n", errnum);
 	if (errnum == 2304)
+	{
+		ft_free_all_malloc();
 		exit(127);
-	exit(FAIL);
+	}
+	if (errnum == 256)
+	{
+		ft_free_all_malloc();
+		exit(1);
+	}
+	return ;
 }
 
 void	add_envp_in_cmd(t_cmd *cmd, char **envp)
