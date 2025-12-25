@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 15:10:15 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/23 15:34:16 by dgibrat          ###   ########.fr       */
+/*   Updated: 2025/12/25 12:27:05 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ t_bool	infile_handler(char **files, t_cmd **cmd, int *fd_pipe)
 	{
 		fd = open(files[0], O_RDONLY);
 		if (fd == -1 || close(fd_pipe[0]) == -1)
-			return (ft_free_all_malloc(), ft_free_all_malloc(), exit(0),
-				SUCCESS);
+			return (ft_free_all_malloc(), exit(0), SUCCESS);
 		if (execve_with_dup2(*cmd, fd, fd_pipe[1]))
 			return (close_pipe(fd_pipe, NULL), close(fd), exitfre(cmd), FAIL);
 	}
