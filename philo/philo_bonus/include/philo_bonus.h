@@ -1,44 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 14:58:32 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/31 10:42:05 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/01 18:09:59 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
+# include <fcntl.h>
 # include <limits.h>
 # include <pthread.h>
+# include <semaphore.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/stat.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 # include <unistd.h>
 
-# define EAT 'E'
-# define SLEEP 'S'
-# define THINK 'T'
-# define FORK 'F'
-# define DEAD 'D'
 # define SECOND_TO_MICROSECOND 1000000
+# define KILL_SIGNAL_PATH "/kill_signal"
+# define FORK_PATH "/fork"
+# define EAT_PATH "/eat"
+# define DEAD_PATH "/dead"
+# define STOP_PATH "/stop"
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
-
-typedef struct s_clock
-{
-	int				*clock_value;
-	pthread_mutex_t	*clock_mutex;
-}					t_clock;
 
 typedef struct s_attr
 {
@@ -50,18 +48,27 @@ typedef struct s_attr
 
 typedef struct s_philo
 {
-	pthread_t		*thread_philo;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
+	pid_t			pid;
+	sem_t			*fork_sem;
+	sem_t			*kill_signal;
+	sem_t			*is_dead;
+	sem_t			*is_eat_enough;
+	pthread_t		wait_dead_thread;
+	pthread_t		wait_eat_thread;
+	int				stop;
+	sem_t			*stop_sem;
 	int				index;
-	char			*state;
-	pthread_mutex_t	*state_mutex;
 	int				time_last_eat;
 	int				nb_eat;
-	pthread_mutex_t	*nb_eat_mutex;
+	int				start_clock;
 	t_attr			*attr;
-	t_clock			*clock;
 }					t_philo;
+
+typedef struct s_arg
+{
+	int				nb_of_philo;
+	t_philo			*philo;
+}					t_arg;
 
 int					ft_atoi(const char *nptr);
 void				*ft_clock(void *clock);
@@ -75,24 +82,14 @@ void				ft_lstadd_back(t_list **lst, t_list *new_lst);
 void				*ft_calloc(size_t nmemb, size_t size);
 void				ft_bzero(void *s, size_t n);
 t_list				*ft_lstlast(t_list *lst);
-t_clock				*init_clock(void);
-pthread_mutex_t		*init_fork(void);
-t_philo				*init_philo(int index, pthread_mutex_t *prev_fork,
-						pthread_mutex_t *right_fork, char *state);
-int					create_all_philos(int count, t_attr *attr, t_clock *clock,
+t_philo				*init_philo(int index, sem_t *fork_sem, sem_t *kill_signal,
+						t_attr *attr);
+int					create_all_philos(int count, t_attr *attr,
 						t_philo ***all_philo);
-int					launch_philo_threads(t_philo **all_philo, int count);
+int					launch_philo_processes(t_philo **all_philo, int count);
+void				philosopher(t_philo *philo);
 void				take_fork(t_philo *philo);
-int					get_last_time_eat(pthread_mutex_t *mutex,
-						int *time_last_eat);
-int					get_clock(pthread_mutex_t *mutex, int *clock);
-char				get_state(pthread_mutex_t *mutex, char *state);
-void				modify_state(pthread_mutex_t *mutex, char *state,
-						char new_state);
-void				modify_time_last_eat(pthread_mutex_t *mutex,
-						int *time_last_eat, int new);
-void				check_state_philos(t_philo **all_philo, int nb_of_philo);
-void				*philosopher(void *arg);
+int					get_clock(int start);
 int					lock_first_fork(t_philo *philo);
 int					lock_second_fork(t_philo *philo);
 int					unlock_first_forks(t_philo *philo);
@@ -106,12 +103,10 @@ char				*ft_itoa(int n);
 size_t				ft_strlen(const char *s);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				close_all_philos(t_philo **all_philo, int nb_of_philo);
-void				set_attr_clock_philo(t_philo *philo, t_clock *clock,
-						t_attr *attr);
-int					get_nb_eat(pthread_mutex_t *mutex, int *nb_eat);
-void				add_nb_eat(pthread_mutex_t *mutex, int *nb_eat);
-void				modify_clock_value(pthread_mutex_t *mutex, int *clock_value,
-						int new);
-void				terminate_clock(t_clock *clock, pthread_t clock_thread);
+void				wait_process_end(t_philo **philo, int nb_of_philos);
+int					check_philo_is_dead(t_philo *philo);
+int					check_philo_eat_enough(t_philo *philo);
+int					get_stop(t_philo *philo);
+void				modify_stop(t_philo *philo, int new);
 
 #endif

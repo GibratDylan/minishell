@@ -2,6 +2,7 @@
     "files.autoSave": "afterDelay",
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "keyhr.42-c-format",
-    "terminal.integrated.gpuAcceleration": "on",
-    "terminal.integrated.defaultProfile.linux": "bash (2)"
+    "terminal.integrated.gpuAcceleration": "off",
+    "terminal.integrated.defaultProfile.linux": "bash (2)",
+    "terminal.integrated.scrollback": 1000
 }

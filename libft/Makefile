@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/03 16:57:37 by dgibrat           #+#    #+#              #
-#    Updated: 2025/12/20 17:10:24 by dgibrat          ###   ########.fr        #
+#    Updated: 2025/12/27 21:35:57 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_strit
 ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_malloc.c\
 ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c get_next_line.c\
 ft_printf.c ft_itoa_base.c ft_strdup_null.c ft_absf.c ft_min.c ft_max.c ft_swap.c ft_isspace.c\
-ft_isnumber.c ft_isint.c ft_tablen.c ft_free_tab.c ft_malloc_2.c ft_realloc.c ft_atof.c ft_abs.c\
+ft_isnumber.c ft_isint.c ft_tablen.c ft_free_tab.c ft_malloc_utils.c ft_realloc.c ft_atof.c ft_abs.c\
 prev_circular.c next_circular.c init_circular.c issorted_circular.c ft_strjoin_free.c ft_strtrim_free.c\
 normalization.c
 

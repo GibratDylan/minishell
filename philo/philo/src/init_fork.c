@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc_2.c                                      :+:      :+:    :+:   */
+/*   init_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/11 10:26:28 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/13 08:35:17 by dgibrat          ###   ########.fr       */
+/*   Created: 2025/12/28 13:59:44 by dgibrat           #+#    #+#             */
+/*   Updated: 2025/12/30 14:29:18 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../include/philo.h"
 
-t_list	*new_node(void *content)
+pthread_mutex_t	*init_fork(void)
 {
-	t_list	*node;
+	pthread_mutex_t	*fork;
 
-	node = malloc(sizeof(t_list));
-	if (node == NULL)
+	fork = ft_malloc(1, sizeof(pthread_mutex_t));
+	if (!fork)
 		return (NULL);
-	node->content = content;
-	node->next = NULL;
-	return (node);
-}
-
-void	free_node(t_list **malloc_list)
-{
-	t_list	*tmp;
-
-	free((*malloc_list)->content);
-	(*malloc_list)->content = NULL;
-	tmp = *malloc_list;
-	*malloc_list = (*malloc_list)->next;
-	free(tmp);
-	tmp = NULL;
+	if (pthread_mutex_init(fork, NULL))
+		return (NULL);
+	return (fork);
 }
