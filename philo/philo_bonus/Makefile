@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/16 15:14:22 by dgibrat           #+#    #+#              #
-#    Updated: 2026/01/01 18:53:54 by dgibrat          ###   ########.fr        #
+#    Updated: 2026/01/02 19:22:23 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,13 @@ FLAGS = -Wall -Wextra -Werror
 
 SRCPATH = src
 
-SRCFILE = main.c ft_memset.c ft_malloc.c ft_malloc_utils.c action_think.c\
-ft_lstadd_back.c ft_calloc.c ft_bzero.c ft_lstlast.c clock.c\
-init_philo.c init_all.c take_fork.c\
-ft_atoi.c philosopher.c action_fork.c action_eat.c\
-action_sleep.c ft_itoa.c ft_strncmp.c ft_strlen.c init_attr.c close_all_philos.c\
-wait_process_end.c stop.c
+SRCFILE = main_bonus.c ft_memset_bonus.c ft_malloc_bonus.c\
+ft_lstadd_back_bonus.c ft_calloc_bonus.c ft_bzero_bonus.c ft_lstlast_bonus.c\
+clock_bonus.c init_philo_bonus.c init_all_bonus.c take_fork_bonus.c\
+ft_atoi_bonus.c philosopher_bonus.c action_fork_bonus.c action_eat_bonus.c\
+action_sleep_bonus.c ft_itoa_bonus.c ft_strncmp_bonus.c ft_strlen_bonus.c\
+init_attr_bonus.c close_all_philos_bonus.c wait_process_end_bonus.c\
+stop_bonus.c action_think_bonus.c ft_malloc_utils_bonus.c\
 
 SRC = $(addprefix $(SRCPATH)/, $(SRCFILE))
 

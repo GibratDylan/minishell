@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 17:12:52 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/02 13:05:23 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/02 15:14:52 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	check_state_philos(t_philo **all_philo, int nb_of_philo)
 			close_all_philos(all_philo, nb_of_philo);
 			return ;
 		}
+		usleep(10);
 		i++;
 	}
 }
@@ -64,7 +65,7 @@ int	check_philo_is_dead(t_philo *philo)
 {
 	if ((get_clock(philo->clock->clock_mutex, philo->clock->clock_value)
 			- get_last_time_eat(philo->state_mutex,
-				&(philo->time_last_eat)) > philo->attr->time_to_die)
+				&(philo->time_last_eat)) >= philo->attr->time_to_die)
 		|| get_state(philo->state_mutex, philo->state) == DEAD)
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 14:58:32 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/02 12:57:50 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/02 14:29:31 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void				ft_bzero(void *s, size_t n);
 t_list				*ft_lstlast(t_list *lst);
 t_philo				*init_philo(int index, sem_t *fork_sem, sem_t *kill_signal,
 						t_attr *attr);
-int					create_all_philos(int count, t_attr *attr,
-						t_philo ***all_philo);
+int					create_all_philos(int i, t_attr *attr, t_philo ***all_philo,
+						sem_t *print_sem);
 int					launch_philo_processes(t_philo **all_philo, int count);
 void				philosopher(t_philo *philo);
 void				take_fork(t_philo *philo);
