@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 14:58:32 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/01 18:09:59 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/02 12:57:50 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define EAT_PATH "/eat"
 # define DEAD_PATH "/dead"
 # define STOP_PATH "/stop"
+# define PRINT_PATH "/print"
 
 typedef struct s_list
 {
@@ -53,6 +54,7 @@ typedef struct s_philo
 	sem_t			*kill_signal;
 	sem_t			*is_dead;
 	sem_t			*is_eat_enough;
+	sem_t			*print_sem;
 	pthread_t		wait_dead_thread;
 	pthread_t		wait_eat_thread;
 	int				stop;
@@ -108,5 +110,6 @@ int					check_philo_is_dead(t_philo *philo);
 int					check_philo_eat_enough(t_philo *philo);
 int					get_stop(t_philo *philo);
 void				modify_stop(t_philo *philo, int new);
+void				*while_check_philo_is_dead(void *arg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/25 14:58:39 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/01 18:58:14 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/02 10:14:23 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	close_semaphore(t_philo **all_philo)
 	sem_unlink(KILL_SIGNAL_PATH);
 	sem_close(all_philo[0]->stop_sem);
 	sem_unlink(STOP_PATH);
+	sem_close(all_philo[0]->print_sem);
+	sem_unlink(PRINT_PATH);
 }
 
 int	main(int argc, char **argv)
@@ -47,4 +49,4 @@ int	main(int argc, char **argv)
 	return (close_semaphore(all_philo), ft_free_all_malloc(), 0);
 }
 
-// norminette et test
+// test

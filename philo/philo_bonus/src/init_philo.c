@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 14:02:29 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/01 14:22:30 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/02 10:39:58 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,9 @@ t_philo	*init_philo(int index, sem_t *fork_sem, sem_t *kill_signal,
 	philo->nb_eat = 0;
 	philo->attr = attr;
 	philo->stop = 0;
+	sem_unlink(PRINT_PATH);
+	philo->print_sem = sem_open(PRINT_PATH, O_CREAT, 0777, 1);
+	if (!philo->print_sem)
+		return (NULL);
 	return (philo);
 }

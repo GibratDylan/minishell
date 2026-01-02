@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 18:41:32 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/01 15:08:36 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/02 11:53:15 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	close_all_philos(t_philo **all_philo, int nb_of_philo)
 		sem_post(all_philo[i]->kill_signal);
 		sem_post(all_philo[i]->is_dead);
 		sem_post(all_philo[i]->is_eat_enough);
+		sem_post(all_philo[i]->fork_sem);
 		i++;
 	}
 	pthread_join(all_philo[0]->wait_dead_thread, NULL);

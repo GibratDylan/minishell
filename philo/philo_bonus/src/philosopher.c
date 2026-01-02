@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 17:17:48 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/01 18:51:00 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/02 12:57:35 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_philo_is_dead(t_philo *philo)
 {
 	if ((get_clock(philo->start_clock)
-			- philo->time_last_eat) > philo->attr->time_to_die)
+			- philo->time_last_eat) >= philo->attr->time_to_die)
 		return (1);
 	return (0);
 }
@@ -37,15 +37,43 @@ static void	*signal_handler(void *arg)
 	return (NULL);
 }
 
+static int	philosopher_status(t_philo *philo)
+{
+	if (get_stop(philo) == 0)
+		take_fork(philo);
+	if (get_stop(philo) == 1)
+		return (1);
+	if (check_philo_is_dead(philo))
+	{
+		sem_wait(philo->print_sem);
+		sem_post(philo->is_dead);
+		if (!get_stop(philo))
+		{
+			usleep(1000);
+			printf("%i %i is dead\n", get_clock(philo->start_clock),
+				philo->index + 1);
+		}
+		sem_post(philo->print_sem);
+		modify_stop(philo, 1);
+		return (1);
+	}
+	if (check_philo_eat_enough(philo))
+	{
+		modify_stop(philo, 1);
+		sem_post(philo->is_eat_enough);
+		return (1);
+	}
+	return (0);
+}
+
 void	philosopher(t_philo *philo)
 {
-	struct timeval	timestamp;
-	pthread_t		signal;
+	pthread_t	signal;
+	pthread_t	clock;
 
 	philo->time_last_eat = 0;
-	gettimeofday(&timestamp, NULL);
 	pthread_create(&signal, NULL, signal_handler, philo);
-	philo->start_clock = timestamp.tv_sec * 1000 + (timestamp.tv_usec / 1000);
+	pthread_create(&clock, NULL, while_check_philo_is_dead, philo);
 	if ((philo->index + 1) % 2)
 	{
 		if (philo->attr->time_to_die * 1000 < philo->attr->time_to_eat)
@@ -55,31 +83,12 @@ void	philosopher(t_philo *philo)
 	}
 	while (1)
 	{
-		if (check_philo_is_dead(philo))
-		{
-			printf("%i %i is dead\n", get_clock(philo->start_clock),
-				philo->index + 1);
-			modify_stop(philo, 1);
-			sem_post(philo->is_dead);
-			pthread_join(signal, NULL);
-			return ;
-		}
-		if (get_stop(philo) == 0)
-			take_fork(philo);
-		if (check_philo_eat_enough(philo))
-		{
-			printf("%i %i has eaten enough\n", get_clock(philo->start_clock),
-				philo->index + 1);
-			modify_stop(philo, 1);
-			sem_post(philo->is_eat_enough);
-			pthread_join(signal, NULL);
-			return ;
-		}
-		if (get_stop(philo) == 1)
+		if (philosopher_status(philo))
 		{
 			pthread_join(signal, NULL);
+			pthread_join(clock, NULL);
 			return ;
 		}
-		usleep(10);
+		usleep(1000);
 	}
 }

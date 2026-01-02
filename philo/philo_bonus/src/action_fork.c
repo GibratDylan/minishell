@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 17:23:47 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/01 18:49:01 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/02 10:43:58 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 int	lock_first_fork(t_philo *philo)
 {
 	sem_wait(philo->fork_sem);
+	sem_wait(philo->print_sem);
 	if (get_stop(philo) || check_philo_is_dead(philo)
 		|| check_philo_eat_enough(philo))
-		return (1);
+		return (sem_post(philo->print_sem), 1);
 	if (printf("%i %i has taken a fork\n", get_clock(philo->start_clock),
 			philo->index + 1) == -1)
-		return (1);
+		return (sem_post(philo->print_sem), 1);
+	sem_post(philo->print_sem);
 	if (get_stop(philo) || check_philo_is_dead(philo)
 		|| check_philo_eat_enough(philo))
 		return (1);
@@ -29,16 +31,15 @@ int	lock_first_fork(t_philo *philo)
 
 int	lock_second_fork(t_philo *philo)
 {
-	int	i;
-
-	sem_getvalue(philo->fork_sem, &i);
 	sem_wait(philo->fork_sem);
+	sem_wait(philo->print_sem);
 	if (get_stop(philo) || check_philo_is_dead(philo)
 		|| check_philo_eat_enough(philo))
-		return (1);
+		return (sem_post(philo->print_sem), 1);
 	if (printf("%i %i has taken a fork\n", get_clock(philo->start_clock),
 			philo->index + 1) == -1)
-		return (1);
+		return (sem_post(philo->print_sem), 1);
+	sem_post(philo->print_sem);
 	return (0);
 }
 

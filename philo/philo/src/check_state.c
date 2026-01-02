@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/28 17:12:52 by dgibrat           #+#    #+#             */
-/*   Updated: 2025/12/30 17:20:08 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/02 13:05:23 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	check_eat_philos(t_philo **all_philo, int nb_of_philo)
 			return (0);
 		i++;
 	}
-	return (1);
+	if (all_philo[0]->attr->eat_before_end == -1)
+		return (0);
+	else
+		return (1);
 }
 
 void	check_state_philos(t_philo **all_philo, int nb_of_philo)
