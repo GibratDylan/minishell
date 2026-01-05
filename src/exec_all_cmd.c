@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 11:11:49 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/05 15:46:42 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/05 17:00:35 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ t_bool	exec_all_cmd(t_command **cmd)
 		i++;
 	}
 	wait_all_pid(&exit_status);
-	if (cmd[0] && modify_env_value("?", cmd[0]->var, ft_itoa(exit_status)))
+	printf("%i\n", WEXITSTATUS(exit_status));
+	if (cmd[0] && modify_env_value("?", cmd[0]->var,
+			ft_itoa(WEXITSTATUS(exit_status))))
 		return (FAIL);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 10:35:03 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/05 14:00:27 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/05 16:45:21 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ int	ft_tab_len(char **tab)
 		return (size);
 	while (tab[size])
 		size++;
-	return (++size);
+	return (size);
 }

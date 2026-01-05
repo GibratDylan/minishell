@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 09:14:32 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/05 15:46:42 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/05 16:48:55 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,8 @@ int	main(int argc, char **argv, char **env)
 	var_cpy = ft_cpy_tab(env);
 	cmd[0]->env = &env_cpy;
 	cmd[0]->var = &var_cpy;
-	// exec_all_cmd(cmd);
-	printf("%s\n", *(cmd[0]->env)[1]);
-	add_env_line("?", cmd[0]->env, "0");
-	printf("%s\n", *(cmd[0]->env)[ft_tab_len(*(cmd[0]->env)) - 2]);
-	printf("%i\n", ft_tab_len(*(cmd[0]->env)));
+	exec_all_cmd(cmd);
+	printf("%s\n", (*(cmd[0]->var))[ft_tab_len(*(cmd[0]->var)) - 1]);
 	ft_free_all_malloc();
 	return (SUCCESS);
 }

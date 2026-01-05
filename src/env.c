@@ -6,7 +6,7 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:10:52 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/05 15:46:41 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/05 16:49:28 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*get_env_value(const char *name, char **env)
 	char	*key;
 	int		size_key;
 
+	if (!name || !(*env))
+		return (NULL);
 	key = ft_strjoin(name, "=", ft_strlen(name));
 	size_key = ft_strlen(key);
 	i = 0;
@@ -40,6 +42,8 @@ int	get_env_line(const char *name, char **env)
 	char	*key;
 	int		size_key;
 
+	if (!name || !(*env))
+		return (-1);
 	key = ft_strjoin(name, "=", ft_strlen(name));
 	size_key = ft_strlen(key);
 	i = 0;
@@ -59,20 +63,22 @@ int	get_env_line(const char *name, char **env)
 t_bool	add_env_line(const char *name, char ***env, char *new_value)
 {
 	size_t	memory_size_array;
-	int		size_array;
+	int		len_array;
 
-	size_array = ft_tab_len(*env);
-	memory_size_array = sizeof(char **) * size_array;
+	if (!name || !(*env) || !new_value)
+		return (FAIL);
+	len_array = ft_tab_len(*env);
+	memory_size_array = sizeof(char *) * len_array + sizeof(char *);
 	*env = ft_realloc(*env, memory_size_array, memory_size_array
-			+ sizeof(char **));
+			+ sizeof(char *));
 	if (!(*env))
 		return (FAIL);
-	*env[size_array - 2] = ft_strjoin(name, "=", ft_strlen(name));
-	if (*env[size_array - 2])
+	(*env)[len_array] = ft_strjoin(name, "=", ft_strlen(name));
+	if (!(*env)[len_array])
 		return (FAIL);
-	*env[size_array - 2] = ft_strjoin_free(*env[size_array - 2], new_value,
-			ft_strlen(name), *env[size_array - 2]);
-	if (*env[size_array - 2])
+	(*env)[len_array] = ft_strjoin_free((*env)[len_array], new_value,
+			ft_strlen((*env)[len_array]), (*env)[len_array]);
+	if (!(*env)[len_array])
 		return (FAIL);
 	return (SUCCESS);
 }
@@ -80,25 +86,26 @@ t_bool	add_env_line(const char *name, char ***env, char *new_value)
 t_bool	modify_env_value(const char *name, char ***env, char *new_value)
 {
 	int		index;
-	int		i;
 	size_t	len_name;
 	size_t	len_line;
 	size_t	len_new_value;
 
+	if (!name || !(*env) || !new_value)
+		return (FAIL);
 	index = get_env_line(name, *env);
 	if (index == -1)
 	{
-		add_env_line(name, env, new_value);
-		index = ft_tab_len(*env) - 2;
+		if (!add_env_line(name, env, new_value))
+			return (FAIL);
+		return (SUCCESS);
 	}
 	len_name = ft_strlen(name);
-	len_line = ft_strlen(*(env)[index]);
+	len_line = ft_strlen((*env)[index]);
 	len_new_value = ft_strlen(new_value);
-	env[index] = ft_realloc(*(env)[index], len_line + 1, len_name
-			+ len_new_value + 2);
-	if (!(*(env)[index]))
+	(*env)[index] = ft_realloc((*env)[index], len_line + 1, len_name
+			+ len_new_value + 1);
+	if (!(*env)[index])
 		return (FAIL);
-	i = len_name + 1;
-	ft_strlcpy(&(*(env)[index][i]), new_value, len_new_value + 1);
+	ft_strlcpy(&((*env)[index][len_name + 1]), new_value, len_new_value + 1);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/03 11:46:59 by dgibrat           #+#    #+#              #
-#    Updated: 2026/01/05 15:53:10 by dgibrat          ###   ########.fr        #
+#    Updated: 2026/01/05 16:54:40 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ debug: FLAGS += -g
 debug: fclean $(NAME)
 
 test: debug
-	valgrind ./$(NAME) ls -la
+	valgrind ./$(NAME) ls /sdfsdfsdf
 
 run: re
 	./$(NAME)
