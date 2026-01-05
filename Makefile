@@ -6,13 +6,13 @@
 #    By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/03 11:46:59 by dgibrat           #+#    #+#              #
-#    Updated: 2026/01/05 14:25:08 by dgibrat          ###   ########.fr        #
+#    Updated: 2026/01/05 15:53:10 by dgibrat          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = test_minishell
+NAME = minishell
 
-HEADERS = include/test_minishell.h
+HEADERS = include/minishell.h
 
 CC = cc
 
