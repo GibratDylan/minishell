@@ -6,11 +6,11 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 13:23:31 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/05 11:22:36 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/05 15:46:42 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/test_minishell.h"
+#include "../include/minishell.h"
 
 static t_list	**get_pid_lst(void)
 {

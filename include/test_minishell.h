@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_minishell.h                                   :+:      :+:    :+:   */
+/*   minishell.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_MINISHELL_H
-# define TEST_MINISHELL_H
+#ifndef minishell_H
+# define minishell_H
 
 # include "../libft/include/libft.h"
 # include <errno.h>

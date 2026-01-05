@@ -6,11 +6,11 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 16:10:52 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/05 14:01:51 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/05 15:46:41 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/test_minishell.h"
+#include "../include/minishell.h"
 
 char	*get_env_value(const char *name, char **env)
 {

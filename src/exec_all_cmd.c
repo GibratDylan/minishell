@@ -6,11 +6,11 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 11:11:49 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/05 14:03:39 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/05 15:46:42 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/test_minishell.h"
+#include "../include/minishell.h"
 
 static void	free_redirs(t_redirection **redirs)
 {

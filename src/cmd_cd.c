@@ -6,11 +6,11 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:48:40 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/05 09:14:25 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/05 15:46:39 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/test_minishell.h"
+#include "../include/minishell.h"
 
 t_bool	check_acces(char *path)
 {

@@ -6,11 +6,11 @@
 /*   By: dgibrat <dgibrat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 11:48:14 by dgibrat           #+#    #+#             */
-/*   Updated: 2026/01/03 16:25:41 by dgibrat          ###   ########.fr       */
+/*   Updated: 2026/01/05 15:46:40 by dgibrat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/test_minishell.h"
+#include "../include/minishell.h"
 
 t_bool	cmd_echo(char **argv)
 {
